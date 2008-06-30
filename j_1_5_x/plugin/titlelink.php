@@ -45,7 +45,7 @@ class plgContentTitleLink extends JPlugin
   var $enabled = "enable";
   var $debug_mode = "debug";
 
-  var $dir        = "plugins/content/titlelink_plugins";
+  var $dir        = 'plugins/content/titlelink_plugins';
   var $pluginmask = 'plugin_';
 
   /**
@@ -63,6 +63,7 @@ class plgContentTitleLink extends JPlugin
   var $enablenewcontent;
   var $disp_link;
   var $disp_tooltip;
+  var $linkr_enabled;
 
   var $finalpattern;
 
@@ -87,6 +88,7 @@ class plgContentTitleLink extends JPlugin
     $this->enablenewcontent = $this->params->get( 'enablenewcontent', 0 );
     $this->disp_link = $this->params->get( 'disp_link', 1 );
     $this->disp_tooltip = $this->params->get( 'disp_tooltip', 1 );
+    $this->linkr_enabled = $this->params->get( 'linkr_enabled', 0 );
 
     $this->finalpattern = $this->pattern_start_end.preg_quote($this->trigger_prefix).".+?".preg_quote($this->trigger_suffix).$this->pattern_start_end;
 
@@ -96,6 +98,51 @@ class plgContentTitleLink extends JPlugin
     }
 
     //$this->titlelink_cache = array();
+  }
+
+  // Send links to Linkr
+  function onLinkrGetLinks( $version )
+  {
+    $result = array();
+
+    // This plugin doesn't actually do anything.
+    // It will only display the current version
+    // in a popup using the LinkrHelper.test()
+    // javascript function
+
+    if ($this->linkr_enabled && $version >= 2.2)
+    {
+      $msg = 'TitleLink plugin is working on Linkr '. $version;
+
+      // Since this will be added to the "onclick"
+      // attribute, use 'single quotes' instead
+      // of "double quotes"
+      //$js = 'LinkrHelper.test(\''. $msg .'\')';
+
+      // Return link title and javascript statement
+      $result = array(
+        'TitleLink' => 'LinkrHelper.layout(\'link\')'
+      );
+    }
+
+    return $result;
+  }
+
+  // Linkr Scripts
+  function onLinkrLoadJS( $version )
+  {
+    if ($this->linkr_enabled && $version >= 2.2)
+    {
+      $doc = & JFactory::getDocument();
+      $doc->addScript( 'plugins/content/titlelink_plugins/linkr_script.js' );
+
+      // URL for AJAX requests. Be sure to use full URLs
+      $r = JURI::base() .'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;'. JUtility::getToken() .'=1';
+
+      return 'LinkrFoo.init("'. $r .'")';
+    }
+
+    return '';
   }
 
   /**
@@ -129,7 +176,7 @@ class plgContentTitleLink extends JPlugin
           {
             continue;
           }
-          
+
           $match = str_replace($this->trigger_prefix, "", $match);
           $match = str_replace($this->trigger_suffix, "", $match);
 
@@ -197,10 +244,10 @@ class plgContentTitleLink extends JPlugin
                 }
                 else
                 {
-                	$titlelink_disabled = false;
+                  $titlelink_disabled = false;
                   $titlelink_was_disabled = true;
                 }
-               	break;
+                break;
               case $this->newwindow:     // open link in a new window?
                 $external = true;
                 break;
@@ -266,14 +313,14 @@ class plgContentTitleLink extends JPlugin
           {
             $content = preg_replace($this->finalpattern, $link, $content, 1);
             $article->text = $content;
-          	continue;
+            continue;
           }
           else if ($titlelink_was_disabled)
           {
             $content = preg_replace($this->finalpattern, $link, $content, 1);
             $article->text = $content;
-          	$titlelink_was_disabled = false;
-          	continue;
+            $titlelink_was_disabled = false;
+            continue;
           }
 
           // try to find a link by help of the plugins
@@ -523,56 +570,6 @@ class plgContentTitleLink extends JPlugin
     return true;
   }
 
-  /**
-   * Example after display title method
-   *
-   * Method is called by the view and the results are imploded and displayed in a placeholder
-   *
-   * @param   object    The article object.  Note $article->text is also available
-   * @param   object    The article params
-   * @param   int     The 'page' number
-   * @return  string
-   */
-  function onAfterDisplayTitle( &$article, &$params, $limitstart )
-  {
-    global $mainframe;
-
-    return '';
-  }
-
-  /**
-   * Example before display content method
-   *
-   * Method is called by the view and the results are imploded and displayed in a placeholder
-   *
-   * @param   object    The article object.  Note $article->text is also available
-   * @param   object    The article params
-   * @param   int     The 'page' number
-   * @return  string
-   */
-  function onBeforeDisplayContent( &$article, &$params, $limitstart )
-  {
-    global $mainframe;
-
-    return '';
-  }
-
-  /**
-   * Example after display content method
-   *
-   * Method is called by the view and the results are imploded and displayed in a placeholder
-   *
-   * @param   object    The article object.  Note $article->text is also available
-   * @param   object    The article params
-   * @param   int     The 'page' number
-   * @return  string
-   */
-  function onAfterDisplayContent( &$article, &$params, $limitstart )
-  {
-    global $mainframe;
-
-    return '';
-  }
 
 
 /////////////////////////////////////////////
@@ -604,7 +601,7 @@ class plgContentTitleLink extends JPlugin
     //$pluginParams   = new JParameter( $plugin->params );
 
     $files = null;
-    $dh  = opendir($dir);
+    $dh  = opendir(JPATH_ROOT.DIRECTORY_SEPARATOR.$dir);
     while (false !== ($filename = readdir($dh)))
     {
       $keyname = substr($filename, 0, strlen($filename) - strlen('.php'));
@@ -629,7 +626,7 @@ class plgContentTitleLink extends JPlugin
     {
       if (!empty($files[$i]))
       {
-        include_once($dir."/".$files[$i]);
+        include_once(JPATH_ROOT.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$files[$i]);
       }
     }
 
