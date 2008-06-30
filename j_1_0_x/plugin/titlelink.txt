@@ -1,0 +1,268 @@
+TitleLink Plugin
+
+Project description: http://extensions.joomla.org/component/option,com_mtree/task,viewlink/link_id,427/Itemid,35/
+Project site:        http://joomlacode.org/gf/project/titlelink/
+Private homepage:    http://www.gesellix.de/
+
+Written by Tobias Gesellchen and Marc Perkel (www.gesellix.de, www.perkel.com)
+
+
+
+Description:
+------------
+TitleLink is a Joomla Content Plugin to easily create links in Joomla content to
+other Joomla content by Title or Alias. By inserting text into your content like
+{ln:Growing African Violets} you link directly to your content with that title.
+The purpose of this program is to help create easy ways to drop links to content
+within the material that you are writing.
+
+
+Installation:
+-------------
+After installing the Plugin be sure to publish the Plugin to activate it.
+Publishing the Plugin is the way you turn it on.
+
+
+Using TitleLink:
+----------------
+TitleLink is used by dropping shortcut references into your content that you are
+writing. Suppose that you have written and published an article called "Growing
+African Violets". You are now writing a new article about plants you can grow
+indoors, and you want to reference and link to your African Violet article. You
+might use it this way: "If you don't have a lot of natural light you might try
+{ln:growing African Violets}."
+
+When the web page is displayed it will link to your article on violets. Suppose
+however that the text you want to display isn't the same as the title you want
+to link to. You can do it this way: "In low light I had good luck raising
+{ln:growing african violets 'violets} indoors."
+
+This will show the link as "violets" but point to the content with the title
+"growing african violets".
+
+Linking is not limited to the title. You can link to the title_alias field as
+well. If you used the word "violets" by itself in the title_alieas then all you
+would have to do to link to it is {ln:violets}.
+
+Linking isn't cases sensitive so you don't have to match case to make the link
+work.
+
+Adding "nw:" tells TitleLink to open the link in a new window.
+
+By default, TitleLink will retry a search in all installed plugins. This second
+try will search for partial matches, so one could have an article titled "One
+Two Three", and a TitleLink {ln:one two} would find that article. To disable the
+retry, just use "em:" (for "exact match") as in {ln:em:one two}.
+
+When the second try was a hit, TitleLink will use your partial phrase (e.g. "one
+two") as the displayed text. To let TitleLink replace your phrase with the
+correct title of the article, use "rep:" (for "replace") as option. {ln:rep:one
+two} would then create a link with "One Two Three" as displayed text.
+
+TitleLink can be used as a shortcut for creating external links. Rather than
+just putting a URL in your text you can easilly turn it into a link as follows:
+{ln:http://joomlacode.org/gf/project/titlelink/}
+
+You can even have the link open a new window with the nw: modifier.
+{ln:nw:http://joomlacode.org/gf/project/titlelink/}
+
+Suppose however you want it to display something else. Here how you would do
+that: {ln:nw:http://joomlacode.org/gf/project/titlelink/ 'TitleLink at JoomlaCode}
+
+You can even create links to google, yahoo, wikipedia or site-internal searches
+by using the key words google, yahoo, wikipedia or search.
+
+Other sites which support keywords are called by using the command
+search-<selector> where <selector> is one of the sites listed at the end of this document.
+
+See the syntax and examples section for details!
+
+
+Syntax:
+-------
+
+{ln[:][debug:][nw:][op:][css-<class>:][search-<selector>:][append-<to append>:][limitstart-<page>][itemid-<id>:][<search|google|yahoo|wikipedia|em|rep>:]<link/phrase>[ '<text to display>[ ''<tooltip to display>]]}
+
+- Entries in square brackets are optional.
+- nw: "new window" - open links in a new window
+- op: "keep tag open" - supress the closing "</a>"
+- css-<class>: set a css-class "<class>"
+- search-<selector>: create a link to an external site/search engine
+- append-<to append>: append to the link,
+  useful for anchors like in http://www.example.com/index.php#anchor
+- limitstart-<page>: selects the page of an article with several pages.
+  <page> starts with 1, which would be the first page of the article (index 0)
+- itemid-<id>: appends <id>, when TitleLink wasn't able to get an itemid by Joomla!
+- search: create a link to a site-internal search
+- google/yahoo: create link to a search by the search engine
+- wikipedia: create a search link for the english version of the wikipedia
+- em: "exact match" - disable searching for partial matches
+- rep: "replace title" - if a partial match was found and no <text to display>
+  was given, display the complete title
+
+
+
+Debugging:
+----------
+
+To help you (and me) debugging problems with TitleLink there are some commands available:
+
+- {ln:enable:false}
+  To disable TitleLink in an article, use the command somewhere inside that article.
+
+- {ln:debug:<phrase and other options>}
+  Lets TitleLink show some debug information, if no link could be built.
+
+
+
+Examples:
+---------
+
+1.  {ln:<phrase>}
+    create simple hyperlink with "phrase" as displayed text
+
+2.  {ln:nw:<phrase>}
+    create the hyperlink, but with the attribute target="_blank" to open it in a new window
+
+3.  {ln:<phrase> '<title>}
+    like 1., but use "title" as displayed text.
+
+4.  {ln:nw:<phrase> '<title>}
+    like 3., but open the link in a new window
+
+5.  {ln:search:<phrase>}
+    create a link which leads to the site-internal search results for <phrase>
+
+6.  {ln:google:<phrase> '<title>}
+    create a link which leads to the google search for <phrase>
+
+7.  {ln:http://www.eff.org 'Electronic Frontier Foundation}
+    creates an external link to the electronic frontier foundation
+
+8.  {ln:op:<phrase>}<img src="image.gif"></a>
+    create a hyperlinked image ("op" for "open", because it won't close "</a>" tag)
+
+9.  {ln:<phrase> '<img src="image.jpg" /> ''<tooltip text>}
+    create a hyperlinked image, linked to <phrase>, and with <tooltip text> as tooltip
+
+10. {ln:css-mainlevel:<phrase>}
+    create simple hyperlink with "phrase" as displayed text and "mainlevel" as css class
+
+11. {ln:search-icq:1234567}
+    --> http://wwp.icq.com/1234567 (show site for the ICQ number 1234567)
+
+    {ln:search-sourceforge:projects/dotplot/}
+    --> http://sourceforge.net/projects/dotplot/
+
+12. {ln:limitstart-2:<phrase>}
+    like 1., but goes to article page 2.
+
+
+Calling TitleLink from your template:
+-------------------------------------
+
+1. insert the following code at the end of your template index.php,
+   before the last '?>'. You probably need to surround it with
+   opening and closing tags: <?php   and   ?>.
+
+   /*
+    * Helper function for TitleLink
+    */
+   function execTitleLink($text)
+   {
+     global $_MAMBOTS, $database, $mosConfig_live_site;
+
+     include ("mambots/content/titlelink.php");
+
+     // simulate Mambo/Joomla parameter structure
+     $mytemprow->text = $text;
+     $mytempparams = "";
+
+     botTitleLink(1, &$mytemprow, $mytempparams);
+     return $mytemprow->text;
+   }
+
+2. insert something like the following call wherever you want the link appear:
+
+   <?php echo execTitleLink("{ln:<phrase>}"); ?>
+
+
+Feedback and Support:
+---------------------
+Tobias Gesellchen (tobias@gesellix.de) is the main programmer.
+Marc Perkel (marc@perkel.com) is the software designer and documentation guy.
+We welcome your ideas and feedback on the program.
+
+
+License:
+--------
+Released under the GPL License.
+
+
+
+Available site selectors for the search-<site> command:
+-------------------------------------------------------
+
+(from http://tavi.sourceforge.net/InterWiki)
+
+<selector>      | target link
+----------------+--------------------------
+abbenormal      | http://www.ourpla.net/cgi-bin/pikie.cgi?<phrase>
+acronym         | http://www.acronymfinder.com/af-query.asp?String=exact&Acronym=<phrase>
+advogato        | http://www.advogato.org/<phrase>
+bible           | http://bible.gospelcom.net/bible?<phrase>
+caffeinatedwiki | http://socrates.yi.org/<phrase>
+cliki           | http://www.cliki.net/<phrase>
+cmwiki          | http://www.cmwiki.com/<phrase>
+creationmatters | http://www.ourpla.net/cgi-bin/wiki.pl?<phrase>
+cssdiscusswiki  | http://css-discuss.incutio.com/?page=<phrase>
+dictionary      | http://www.dictionary.com/cgi-bin/dict.pl?term=<phrase>
+doiwalters      | http://www.doiwalters.com/wiki/<phrase>
+emacswiki       | http://www.emacswiki.org/cgi-bin/wiki/<phrase>
+everything2     | http://www.everything2.com/<phrase>
+foldoc          | http://www.foldoc.org/foldoc/foldoc.cgi?<phrase>
+foxwiki         | http://fox.wikis.com/wc.dll?Wiki~<phrase>
+geekido         | http://geekido.org/index.php?page=<phrase>
+google          | http://www.google.com/search?q=<phrase>
+googlegroups    | http://groups.google.com/groups?q=<phrase>
+h2g2            | http://www.bbc.co.uk/h2g2/guide/Search?searchstring=<phrase>
+hootoo          | http://www.bbc.co.uk/h2g2/guide/Search?searchstring=<phrase>
+hhgg            | http://www.bbc.co.uk/dna/h2g2/<phrase>
+iawiki          | http://www.IAwiki.net/<phrase>
+icq             | http://wwp.icq.com/<phrase>
+imdb            | http://us.imdb.com/Title?<phrase>
+jargonfile      | http://sunir.org/apps/meta.pl?wiki=JargonFile&redirect=<phrase>
+jtf             | http://www.justthefaqs.org/?page=<phrase>
+knowhow         | http://www2.iro.umontreal.ca/~paquetse/cgi-bin/wiki.cgi?<phrase>
+kwiki           | http://kwiki.org/?<phrase>
+linuxquestions  | http://wiki.linuxquestions.org/wiki/<phrase>
+livejournal     | http://www.livejournal.com/users/<phrase>
+meatball        | http://www.usemod.com/cgi-bin/mb.pl?<phrase>
+metawiki        | http://sunir.org/apps/meta.pl?words=<phrase>
+moinmoin        | http://moinmoin.wikiwikiweb.de/<phrase>
+openwiki        | http://openwiki.com/ow.asp?<phrase>
+orgpatterns     | http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns?<phrase>
+patent          | http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=<phrase>
+pgpkey          | http://keys.pgp.dk:11371/pks/lookup?op=get&search=<phrase>
+phpwiki         | http://phpwiki.sourceforge.net/phpwiki/<phrase>
+pikie           | http://pikie.webbing.nl/cgi-bin/pikie.cgi?<phrase>
+ppr             | http://c2.com/cgi/wiki?<phrase>
+pythoninfo      | http://www.python.org/cgi-bin/moinmoin/<phrase>
+rfc             | http://www.rfc.org.uk/cgi-bin/lookup.cgi?rfc=<phrase>
+sourceforge     | http://sourceforge.net/<phrase>
+squeak          | http://minnow.cc.gatech.edu/squeak/<phrase>
+squirrelmail    | http://squirrelmail.org/wiki/wiki.php?<phrase>
+tavi            | http://tavi.sourceforge.net/<phrase>
+thesaurus       | http://www.thesaurus.com/cgi-bin/search?config=roget&words=<phrase>
+thinki          | http://www.thinkware.se/cgi-bin/thinki.cgi/<phrase>
+twiki           | http://twiki.sourceforge.net/cgi-bin/view/<phrase>
+usemod          | http://www.usemod.com/cgi-bin/wiki.pl?<phrase>
+visualworks     | http://wiki.cs.uiuc.edu/VisualWorks/<phrase>
+webster         | http://m-w.com/cgi-bin/dictionary?va=<phrase>
+why             | http://clublet.com/c/c/why?<phrase>
+wiki            | http://c2.com/cgi/wiki?<phrase>
+wikifind        | http://c2.com/cgi/wiki?FindPage&value=<phrase>
+wikipedia       | http://en.wikipedia.org/wiki/<phrase>
+wiktionary      | http://en.wiktionary.org/wiki/<phrase>
+wunderground    | http://www.wunderground.com/cgi-bin/findweather/getForecast?query=<phrase>
+zwiki           | http://www.zwiki.org/<phrase>
