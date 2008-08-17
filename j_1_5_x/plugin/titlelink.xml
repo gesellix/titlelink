@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<install version="1.5" type="plugin" group="content">
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="content" >
 	<name>Content - TitleLink</name>
 	<author>Tobias Gesellchen</author>
 	<creationDate>2008-06-03</creationDate>
@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>tobias@gesellix.de</authorEmail>
 	<authorUrl>www.gesellix.de</authorUrl>
-	<version>3.0.3 2008-06-15 stable</version>
+	<version>3.0.4 2008-08-17 stable</version>
   <description>DESCTITLELINK</description>
   <files>
     <filename plugin="titlelink">titlelink.php</filename>
