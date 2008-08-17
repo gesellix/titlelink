@@ -88,7 +88,7 @@ class plgContentTitleLink extends JPlugin
     $this->enablenewcontent = $this->params->get( 'enablenewcontent', 0 );
     $this->disp_link = $this->params->get( 'disp_link', 1 );
     $this->disp_tooltip = $this->params->get( 'disp_tooltip', 1 );
-    $this->linkr_enabled = $this->params->get( 'linkr_enabled', 0 );
+    $this->linkr_enabled = $this->params->get( 'linkr_enabled', 1 );
 
     $this->finalpattern = $this->pattern_start_end.preg_quote($this->trigger_prefix).".+?".preg_quote($this->trigger_suffix).$this->pattern_start_end;
 
@@ -131,7 +131,7 @@ class plgContentTitleLink extends JPlugin
   // Linkr Scripts
   function onLinkrLoadJS( $version )
   {
-    if ($this->linkr_enabled && $version >= 2.2)
+    if ($this->linkr_enabled && $version >= 2.2 && 2==1)
     {
       $doc = & JFactory::getDocument();
       $doc->addScript( 'plugins/content/titlelink_plugins/linkr_script.js' );
@@ -139,7 +139,7 @@ class plgContentTitleLink extends JPlugin
       // URL for AJAX requests. Be sure to use full URLs
       $r = JURI::base() .'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;'. JUtility::getToken() .'=1';
 
-      return 'LinkrFoo.init("'. $r .'")';
+      return 'LinkrFoo.init(\''. $r .'\');';
     }
 
     return '';
@@ -458,7 +458,7 @@ class plgContentTitleLink extends JPlugin
               $link .= "&".$this->plugin_call."=".$plugin_call_name;
             }
 
-            if ($this->startswith($link, "http"))
+            if ($this->isExternal($link))
             {
               // external link
               //$link = htmlentities($link);
@@ -574,6 +574,16 @@ class plgContentTitleLink extends JPlugin
 
 /////////////////////////////////////////////
 // internal functions
+
+  function isExternal($link)
+  {
+    $link_pattern='/^(http:\/\/|)(www.|)([^\/]+)/i';
+
+    preg_match($link_pattern, $link, $domain);
+    preg_match($link_pattern, $_SERVER['HTTP_HOST'], $http);
+
+    return $this->startswith($link, "http") && ((isset($domain[3])) and (isset($http[3])) and ($domain[3]!==$http[3]));
+}
 
   function getByPlugins($database, $plugins, $phrase, $partial_match)
   {

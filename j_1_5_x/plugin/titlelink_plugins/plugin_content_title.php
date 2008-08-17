@@ -14,14 +14,23 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   $base_link = "index.php?option=com_content&view=article&id=";
 
   $result = null;
-  $where_clause = ($partial_match) ? "LIKE '%$phrase%'" : "= '$phrase'";
+  
+  $query  = "SELECT a.id, a.alias AS artalias, c.id as catid, c.alias AS catalias, a.sectionid";
+  $query .= " FROM jos_content AS a ";
+  $query .= " INNER JOIN jos_categories AS c ON a.catid = c.id ";
+  $query .= " INNER JOIN jos_sections AS s ON a.sectionid = s.id ";
 
-  $database->setQuery("SELECT * FROM #__content WHERE state=1 AND alias ". $where_clause);
+  $where_clause = " WHERE a.state=1 ";
+  
+  $where_variant = " AND a.alias " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+
+  $database->setQuery($query.$where_clause.$where_variant);
+
   $my = null;
   $my = $database->loadObject();
   if ($my)  // found something?
   {
-    $result[] = $base_link.$my->id;
+    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
     $result[] = $my->alias;
 
     $itemid = $mainframe->getItemid( $my->id );
@@ -32,12 +41,15 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   }
   else
   {
-    $database->setQuery("SELECT * FROM #__content WHERE state=1 AND title ". $where_clause);
+    $where_variant = " AND a.title " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+
+    $database->setQuery($query.$where_clause.$where_variant);
+
     $my = null;
     $my = $database->loadObject();
     if ($my)
     {
-      $result[] = $base_link.$my->id;
+      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
       $result[] = $my->title;
 
       $itemid = $mainframe->getItemid( $my->id );
