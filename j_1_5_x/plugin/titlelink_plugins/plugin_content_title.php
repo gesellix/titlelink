@@ -20,7 +20,7 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
 
   $result = null;
 
-  $query  = "SELECT a.id, a.alias AS artalias, c.id as catid, c.alias AS catalias, a.sectionid";
+  $query  = "SELECT a.id, a.title AS arttitle, a.alias AS artalias, c.id as catid, c.alias AS catalias, a.sectionid";
   $query .= " FROM jos_content AS a ";
   $query .= " INNER JOIN jos_categories AS c ON a.catid = c.id ";
   $query .= " INNER JOIN jos_sections AS s ON a.sectionid = s.id ";
@@ -36,7 +36,7 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   if ($my)  // found something?
   {
     $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-    $result[] = $my->alias;
+    $result[] = $my->artalias;
 
     $itemid = $mainframe->getItemid( $my->id );
     if ($itemid)
@@ -55,7 +55,7 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
     if ($my)
     {
       $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-      $result[] = $my->title;
+      $result[] = $my->arttitle;
 
       $itemid = $mainframe->getItemid( $my->id );
       if ($itemid)
