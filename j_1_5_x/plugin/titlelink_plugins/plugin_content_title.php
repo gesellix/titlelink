@@ -21,9 +21,9 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   $result = null;
 
   $query  = "SELECT a.id, a.title AS arttitle, a.alias AS artalias, c.id as catid, c.alias AS catalias, a.sectionid";
-  $query .= " FROM jos_content AS a ";
-  $query .= " INNER JOIN jos_categories AS c ON a.catid = c.id ";
-  $query .= " INNER JOIN jos_sections AS s ON a.sectionid = s.id ";
+  $query .= " FROM #__content AS a ";
+  $query .= " LEFT JOIN #__categories AS c ON a.catid = c.id ";
+  $query .= " LEFT JOIN #__sections AS s ON a.sectionid = s.id ";
 
   $where_clause = " WHERE a.state=1 ";
 
@@ -35,8 +35,16 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   $my = $database->loadObject();
   if ($my)  // found something?
   {
-    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-    $result[] = $my->artalias;
+	if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
+	{
+	    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
+	    $result[] = $my->artalias;
+	}
+	else
+	{
+	    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
+	    $result[] = $my->artalias;
+	}
 
     $itemid = $mainframe->getItemid( $my->id );
     if ($itemid)
@@ -54,8 +62,16 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
     $my = $database->loadObject();
     if ($my)
     {
-      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-      $result[] = $my->arttitle;
+	  if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
+	  {
+	      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
+	      $result[] = $my->arttitle;
+	  }
+	  else
+	  {
+	      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
+	      $result[] = $my->arttitle;
+	  }
 
       $itemid = $mainframe->getItemid( $my->id );
       if ($itemid)
