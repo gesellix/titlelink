@@ -4,6 +4,11 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2008-10-19:
+
+- updated documentation link http://www.gesellix.de/joomla/36-titlelink/46-titlelink-documentation.html
+
+
 2008-09-17:
 
 - fixes [#12606] TL 3.0.5 cannot find uncategorized articles
