@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>tobias@gesellix.de</authorEmail>
 	<authorUrl>www.gesellix.de</authorUrl>
-	<version>3.0.6 2008-09-18 stable</version>
+	<version>3.0.8 2008-10-26 stable</version>
   <description>DESCTITLELINK</description>
   <files>
     <filename plugin="titlelink">titlelink.php</filename>
@@ -17,6 +17,12 @@
     <filename>titlelink_plugins/plugin_shortlink.php</filename>
     <filename>titlelink_plugins/plugin_virtuemart.php</filename>
     <filename>titlelink_plugins/plugin_virtuemart_category.php</filename>
+    <!-- TODO new option to sort plugins... 
+    <filename>titlelink_plugins/plugin_alberghi.php</filename>
+    <filename>titlelink_plugins/plugin_artforms.php</filename>
+    <filename>titlelink_plugins/plugin_docman.php</filename>
+    <filename>titlelink_plugins/plugin_peoplebook.php</filename>
+     -->
   </files>
   <!-- old method to describe language files 
        Generally works
@@ -59,7 +65,7 @@
       default="}" 
       label="Suffix"
       description="Default: }" />
-		<param name="@spacer" type="spacer" default="" label="" description="" />
+	<param name="@spacer" type="spacer" default="" label="" description="" />
     <param
       name="enablenewcontent"
       type="radio"
@@ -77,7 +83,7 @@
       description="Options for Displayed Link (if no explicit title entered after ')">
       <option value="0">Query String</option>
       <option value="1">Query Result</option>
-     </param>
+    </param>
     <param
       name="disp_tooltip"
       type="list"
@@ -87,8 +93,8 @@
       <option value="0">Query String</option>
       <option value="1">Query Result</option>
       <option value="2">Explicit Title</option>
-     </param>
-		<param name="@spacer" type="spacer" default="" label="" description="" />
+    </param>
+	<param name="@spacer" type="spacer" default="" label="" description="" />
     <param
       name="plugin_content_title"
       type="radio"
@@ -134,5 +140,43 @@
       <option value="1">Enabled</option>
       <option value="0">Disabled</option>
     </param>
+    <!-- TODO new option to sort plugins
+    <param
+      name="plugin_alberghi"
+      type="radio"
+      default="1"
+      label="Content by Alberghi (needs com_alberghi)"
+      description="TODO.">
+      <option value="1">Enabled</option>
+      <option value="0">Disabled</option>
+    </param>
+    <param
+      name="plugin_artforms"
+      type="radio"
+      default="1"
+      label="Content by ArtForms (needs com_artforms)"
+      description="TODO.">
+      <option value="1">Enabled</option>
+      <option value="0">Disabled</option>
+    </param>
+    <param
+      name="plugin_docman"
+      type="radio"
+      default="1"
+      label="Content by DocMan (needs com_docman)"
+      description="TODO.">
+      <option value="1">Enabled</option>
+      <option value="0">Disabled</option>
+    </param>
+    <param
+      name="plugin_peoplebook"
+      type="radio"
+      default="1"
+      label="Content by PeopleBook (needs com_peoplebook)"
+      description="TODO.">
+      <option value="1">Enabled</option>
+      <option value="0">Disabled</option>
+    </param>
+     -->
   </params>
 </install>

@@ -8,10 +8,11 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 function plugin_downloadRemos($database, $phrase, $partial_match = true)
 {
   $result = null;
-  $where_clause = ($partial_match) ? "LIKE '%$phrase%'" : "= '$phrase'";
 
   if (file_exists("components/com_remository/remository.php"))
   {
+    $where_clause = ($partial_match) ? "LIKE '%$phrase%'" : "= '$phrase'";
+  	
     $database->setQuery("SELECT * FROM #__downloads_files WHERE published=1 AND filetitle ". $where_clause);
     $my = null;
     $my = $database->loadObject();
