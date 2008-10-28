@@ -634,23 +634,21 @@ class plgContentTitleLink extends JPlugin
     $orders = array();
     
 	// Obtain a list of columns
-	foreach ($files as $key => $row) {
-	    $filenames[$key]  = $row['file'];
+	foreach($files as $key => $row)
+	{
+	    $filenames[$key] = $row['file'];
 	    $orders[$key] = $row['order'];
 	}
 	
-	// Sort the data with volume descending, edition ascending
-	// Add $data as the last parameter, to sort by the common key
 	array_multisort($orders, SORT_ASC, $filenames, SORT_ASC, $files);
 
     // load plugins
-    $count = count($files);
-    for ($i = 0; $i < $count; $i++)
+    foreach($files as $key => $row)
     {
-      $tmp = $files[$i];
-      if (!empty($tmp['file']))
+      $file = $row['file'];
+      if (!empty($file))
       {
-        include_once(JPATH_ROOT.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$files[$i]);
+        include_once(JPATH_ROOT.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$file);
       }
     }
 
