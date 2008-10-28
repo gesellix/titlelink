@@ -617,10 +617,10 @@ class plgContentTitleLink extends JPlugin
       $keyname = substr($filename, 0, strlen($filename) - strlen('.php'));
 
       if ($this->startswith($filename, $pluginmask)
-          && $pluginParams->get($keyname, 1) == 1)
+          && $pluginParams->get($keyname, 1) > 0)
       {
         // found "plugin", include in list
-        $files[] = $filename;
+        $files[] = array('file' => $filename, 'order' => $pluginParams->get($keyname, 0));
       }
     }
 
@@ -629,6 +629,19 @@ class plgContentTitleLink extends JPlugin
       // no plugin found
       return null;
     }
+
+    $filenames = array();
+    $orders = array();
+    
+	// Obtain a list of columns
+	foreach ($files as $key => $row) {
+	    $filenames[$key]  = $row['file'];
+	    $orders[$key] = $row['order'];
+	}
+	
+	// Sort the data with volume descending, edition ascending
+	// Add $data as the last parameter, to sort by the common key
+	array_multisort($orders, SORT_ASC, $filenames, SORT_ASC, $files);
 
     // load plugins
     $count = count($files);
