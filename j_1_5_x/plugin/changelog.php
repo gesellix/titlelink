@@ -6,7 +6,9 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 2008-10-28:
 
-- corrections for new plugins (using new Joomla! 1.5.x API) 
+- corrections for new plugins (using new Joomla! 1.5.x API)
+- implemented new sorting of plugins
+- other plugins are disabled by default (only content and menuitem plugins are enabled) 
 
 
 2008-10-26:
