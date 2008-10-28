@@ -19,16 +19,18 @@ function plugin_artforms($database, $phrase, $partial_match = true)
   {
     $where_clause = ($partial_match) ? "LIKE '%$phrase%'" : "= '$phrase'";
   	
-    $my = null;
     $database->setQuery("SELECT * FROM #__artforms WHERE published=1 AND titel ". $where_clause);
-    if ($database->loadObject( $my ))  // found something?
+    $my = null;
+	$my = $database->loadObject();
+	if ($my)  // found something?
     {
       $result[] = "index.php?option=com_artforms&formid=".$my->id;
       $result[] = $my->titel;
 
-      $my = null;
       $database->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_artforms' AND published=1");
-      if ($database->loadObject( $my ))
+      $my = null;
+	  $my = $database->loadObject();
+	  if ($my)  // found something?
       {
         $result[0] .= "&Itemid=".$my->id;
       }
