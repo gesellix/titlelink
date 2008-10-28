@@ -617,7 +617,7 @@ class plgContentTitleLink extends JPlugin
       $keyname = substr($filename, 0, strlen($filename) - strlen('.php'));
 
       if ($this->startswith($filename, $pluginmask)
-          && $pluginParams->get($keyname, 1) > 0)
+          && $pluginParams->get($keyname, 0) > 0)
       {
         // found "plugin", include in list
         $files[] = array('file' => $filename, 'order' => $pluginParams->get($keyname, 0));
@@ -647,7 +647,8 @@ class plgContentTitleLink extends JPlugin
     $count = count($files);
     for ($i = 0; $i < $count; $i++)
     {
-      if (!empty($files[$i]))
+      $tmp = $files[$i];
+      if (!empty($tmp['file']))
       {
         include_once(JPATH_ROOT.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$files[$i]);
       }
