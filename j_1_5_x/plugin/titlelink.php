@@ -429,11 +429,11 @@ class plgContentTitleLink extends JPlugin
             // set title
             if ($debug_enabled && $external)
             {
-              $options .= "title=\"$link_title (open in new window)\"";
+              $options .= "title=".$link_title."\" (open in new window)\"";
             }
             else
             {
-              $options .= "title=\"$link_title\"";
+              $options .= "title=\"".$link_title."\"";
             }
 
             // open the link in a new window?
@@ -477,7 +477,7 @@ class plgContentTitleLink extends JPlugin
               $link .= $anchor;
             }
 
-            $link = "<a href=\"".$link."\" $options>";
+            $link = "<a href=\"".$link."\" ".$options.">";
 
             if (!$create_open_tag)
             {
@@ -511,7 +511,7 @@ class plgContentTitleLink extends JPlugin
 
             if ($debug_enabled)
             {
-              $link = "<p>dump:";
+              $link .= "<p>dump:";
 
               $link .= "<br />new window: ".(($external) ? "yes" : "no");
 
@@ -519,26 +519,26 @@ class plgContentTitleLink extends JPlugin
               $count = count($pieces);
               for ($i = 0; $i < $count; $i++)
               {
-                $link .= "<li>$pieces[$i]</li>";
+                $link .= "<li>".$pieces[$i]."</li>";
               }
               $link .= "</ul>";
 
-              $link .= "<br />pieces2:<ul>";
-              $count = count($pieces2);
+              $link .= "<br />plugin-results:<ul>";
+              $count = count($result);
               for ($i = 0; $i < $count; $i++)
               {
-                $link .= "<li>$pieces2[$i]</li>";
+                $link .= "<li>".$result[$i]."</li>";
               }
               $link .= "</ul>";
 
-              $link .= "<br />phrase=$phrase";
-              $link .= "<br />title=$title";
+              $link .= "<br />phrase=".$phrase;
+              $link .= "<br />title=".$title;
 
               $link .= "<br />available plugins:<ul>";
               $count = count($this->plugin_cache);
               for ($i = 0; $i < $count; $i++)
               {
-                $link .= "<li>$this->plugin_cache[$i]</li>";
+                $link .= "<li>".$this->plugin_cache[$i]."</li>";
               }
               $link .= "</ul>";
 
@@ -553,7 +553,17 @@ class plgContentTitleLink extends JPlugin
 
     $article->text = $content;
 
-    //$plugin_get = $_GET[$this->plugin_call];
+    callExternalPlugin($article, $params, $limitstart);
+
+    return true;
+  }
+
+
+
+/////////////////////////////////////////////
+// internal functions
+
+  function callExternalPlugin($article, $params, $limitstart) {
     $plugin_to_call = JRequest::getVar($this->plugin_call);
     //$plugin_to_call = html_entity_decode(mosGetParam($_GET, $this->plugin_call), ENT_QUOTES);
     $plugin_to_call = stripslashes($plugin_to_call);
@@ -564,17 +574,10 @@ class plgContentTitleLink extends JPlugin
 
 // TODO call generic $_MAMBOTS
 //MAZ changed this to botMosEbayKit3
-      botMosEbayKit3(true, $article, $params, $page);
+      botMosEbayKit3(true, $article, $params, $limitstart);
     }
-
-    return true;
   }
-
-
-
-/////////////////////////////////////////////
-// internal functions
-
+  
   function isExternal($link)
   {
     $link_pattern='/^(http:\/\/|)(www.|)([^\/]+)/i';
