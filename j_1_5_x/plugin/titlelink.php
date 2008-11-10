@@ -258,7 +258,7 @@ class plgContentTitleLink extends JPlugin
               case $this->search_google:     // get a google search link
               case $this->search_yahoo:      // get a yahoo search link
               case $this->search_wikipedia:  // get a wikipedia search link
-                $link = $this->getSearchLink(substr($pieces[$i], strlen($this->search_pattern)), $phrase);
+                $link = $this->getSearchLink($pieces[$i], $phrase);
                 $name = $phrase;
                 break;
               case $this->exact_match:   // disable partial matching?
@@ -724,7 +724,7 @@ class plgContentTitleLink extends JPlugin
     {
       case "search":
         // local search
-        $search_link = "index.php?option=search&searchword=".$phrase;
+        $search_link = "index.php?option=com_search&ordering=&searchphrase=all&searchword=".$phrase;
         $space_replacement = "+";
         break;
 
