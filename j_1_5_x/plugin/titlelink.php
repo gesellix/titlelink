@@ -553,7 +553,7 @@ class plgContentTitleLink extends JPlugin
 
     $article->text = $content;
 
-    callExternalPlugin($article, $params, $limitstart);
+    $this->callExternalPlugin($article, $params, $limitstart);
 
     return true;
   }
