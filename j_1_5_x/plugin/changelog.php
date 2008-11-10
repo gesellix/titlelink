@@ -4,6 +4,12 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2008-11-10:
+
+- [#13627] link to the site-internal search
+- code cleanup
+
+
 2008-10-28:
 
 - corrections for new plugins (using new Joomla! 1.5.x API)
