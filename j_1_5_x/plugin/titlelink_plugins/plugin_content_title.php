@@ -16,7 +16,7 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
 
   //$database = & JFactory::getDBO();
 
-  $base_link = "index.php?option=com_content&view=article&id=";
+  //$base_link = "index.php?option=com_content&view=article&id=";
 
   $result = null;
 
@@ -28,59 +28,48 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
   $where_clause = " WHERE a.state=1 ";
 
   $where_variant = " AND a.alias " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+  $result = findContentInternal($database, $query.$where_clause.$where_variant, false);
 
-  $database->setQuery($query.$where_clause.$where_variant);
+  if ($result == null)
+  {
+    $where_variant = " AND a.title " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+  	$result = findContentInternal($database, $query.$where_clause.$where_variant, true);
+  }
+  
+  return $result;
+}
+
+function findContentInternal($database, $query_variant, $getTitle)
+{
+  $result = null;
+	
+  $database->setQuery($query_variant);
 
   $my = null;
   $my = $database->loadObject();
-  if ($my)  // found something?
+  if ($my)
   {
-	if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
-	{
-	    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
-	    $result[] = $my->artalias;
-	}
-	else
-	{
-	    $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-	    $result[] = $my->artalias;
-	}
-
-    $itemid = $mainframe->getItemid( $my->id );
-    if ($itemid)
+    if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
     {
-      $result[0] .= "&Itemid=".$itemid;
+      $result[0] = ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
     }
-  }
-  else
-  {
-    $where_variant = " AND a.title " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
-
-    $database->setQuery($query.$where_clause.$where_variant);
-
-    $my = null;
-    $my = $database->loadObject();
-    if ($my)
+    else
     {
-	  if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
-	  {
-	      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
-	      $result[] = $my->arttitle;
-	  }
-	  else
-	  {
-	      $result[] = $base_link.ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
-	      $result[] = $my->arttitle;
-	  }
+      $result[0] = ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
+    }
+    
+    $result[1] = ($getTitle) ? $my->arttitle : $my->artalias;
 
-      $itemid = $mainframe->getItemid( $my->id );
+    if (strpos($result[0], '&Itemid=') < 0)
+    {
+	  $itemid = $mainframe->getItemid( $my->id );
       if ($itemid)
       {
         $result[0] .= "&Itemid=".$itemid;
       }
     }
   }
-
+  
   return $result;
 }
 

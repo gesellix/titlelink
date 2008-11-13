@@ -294,7 +294,7 @@ class plgContentTitleLink extends JPlugin
                 }
                 else if ($this->startswith($pieces[$i], $this->search_pattern))
                 {
-                  $link = $this->getSearchLink(substr($pieces[$i], strlen($this->search_pattern)), $phrase);
+                  $link = $this->getSearchLink(substr($pieces[$i], 0, strlen($this->search_pattern)), $phrase);
                   $name = $phrase;
                 }
                 else if ($this->startswith($phrase, "index.php"))
