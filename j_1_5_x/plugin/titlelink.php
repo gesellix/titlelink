@@ -61,6 +61,7 @@ class plgContentTitleLink extends JPlugin
   var $trigger_suffix;
   var $separator;
   var $enablenewcontent;
+  var $enablepartialmatch;
   var $disp_link;
   var $disp_tooltip;
   var $linkr_enabled;
@@ -86,6 +87,7 @@ class plgContentTitleLink extends JPlugin
     $this->trigger_suffix = $this->params->get( 'trigger_suffix', "}" );
     $this->separator = $this->params->get( 'separator', ":" );
     $this->enablenewcontent = $this->params->get( 'enablenewcontent', 0 );
+    $this->enablepartialmatch = $this->params->get( 'enablepartialmatch', 1 );
     $this->disp_link = $this->params->get( 'disp_link', 1 );
     $this->disp_tooltip = $this->params->get( 'disp_tooltip', 1 );
     $this->linkr_enabled = $this->params->get( 'linkr_enabled', 1 );
@@ -222,7 +224,7 @@ class plgContentTitleLink extends JPlugin
           $search = null;
           $external = null;
           $debug_enabled = null;
-          $partial_match = true;
+          $partial_match = $this->enablepartialmatch == 1;
           $replace_partial_match = true;
           $create_open_tag = false;
           $my_item_id = null;

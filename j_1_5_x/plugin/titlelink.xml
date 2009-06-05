@@ -66,6 +66,15 @@
       description="Default: }" />
 	<param name="@spacer" type="spacer" default="" label="" description="" />
     <param
+      name="enablepartialmatch"
+      type="radio"
+      default="1"
+      label="Enable partial match"
+      description="If no match is found with the exact search, try partial matching.">
+      <option value="1">Enabled</option>
+      <option value="0">Disabled</option>
+    </param>
+    <param
       name="enablenewcontent"
       type="radio"
       default="0"
