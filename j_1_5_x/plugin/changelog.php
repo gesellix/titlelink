@@ -4,6 +4,11 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2009-05-27:
+
+- added plugin_jmovies (thanks to Onimaro)
+
+
 2008-11-13:
 
 - fixed creation of wrong content article links ... though they worked correctly in Joomla *phew*
