@@ -4,6 +4,11 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2009-06-06:
+
+- [#16580] Exact Match as default or plugin option
+
+
 2009-05-27:
 
 - added plugin_jmovies (thanks to Onimaro)
