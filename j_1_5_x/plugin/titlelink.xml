@@ -3,11 +3,11 @@
 	<name>Content - TitleLink</name>
 	<author>Tobias Gesellchen</author>
 	<creationDate>2008-06-03</creationDate>
-	<copyright>(C) 2005-2009 Tobias Gesellchen. All rights reserved.</copyright>
+	<copyright>(C) 2005-2010 Tobias Gesellchen. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>tobias@gesellix.de</authorEmail>
 	<authorUrl>www.gesellix.de</authorUrl>
-	<version>3.2.0 2009-06-06 stable</version>
+	<version>3.2.1 2010-08-08 stable</version>
   <description>DESCTITLELINK</description>
   <files>
     <filename plugin="titlelink">titlelink.php</filename>

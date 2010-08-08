@@ -592,10 +592,12 @@ class plgContentTitleLink extends JPlugin
 
   function getByPlugins($database, $plugins, $phrase, $partial_match)
   {
+    $phrase_escaped = $database->getEscaped($phrase, true);
+
     $count = count($plugins);
     for ($i = 0; $i < $count; $i++)
     {
-      $result = call_user_func($plugins[$i], $database, $phrase, $partial_match);
+      $result = call_user_func($plugins[$i], $database, $phrase_escaped, $partial_match);
 
       // magix number '2' is the amount of strings we need as result
       if (count($result) == 2)

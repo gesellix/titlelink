@@ -27,12 +27,18 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
 
   $where_clause = " WHERE a.state=1 ";
 
-  $where_variant = " AND a.alias " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+  $where_variant = " AND a.alias " .
+  				(($partial_match)
+  					? " LIKE ".$database->quote('%'.$phrase.'%', false)
+    				: "= ".$database->quote($phrase, false));
   $result = findContentInternal($database, $query.$where_clause.$where_variant, false);
 
   if ($result == null)
   {
-    $where_variant = " AND a.title " . (($partial_match) ? " LIKE '%$phrase%'" : "= '$phrase'");
+    $where_variant = " AND a.title " .
+  				(($partial_match)
+  					? " LIKE ".$database->quote('%'.$phrase.'%', false)
+  					: "= ".$database->quote($phrase, false));
   	$result = findContentInternal($database, $query.$where_clause.$where_variant, true);
   }
   
