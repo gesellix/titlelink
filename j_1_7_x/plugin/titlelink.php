@@ -133,7 +133,7 @@ class plgSystemTitleLink extends JPlugin
   {
     if ($this->linkr_enabled && $version >= 2.2 && 2 == 1) {
       $doc = & JFactory::getDocument();
-      $doc->addScript('plugins/content/titlelink/titlelink_plugins/linkr_script.js');
+      $doc->addScript('plugins/system/titlelink/titlelink_plugins/linkr_script.js');
 
       // URL for AJAX requests. Be sure to use full URLs
       $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JUtility::getToken() . '=1';
@@ -317,12 +317,12 @@ class plgSystemTitleLink extends JPlugin
 
           if ($titlelink_disabled) {
             $content = preg_replace($this->finalpattern, $link, $content, 1);
-            //            $article->text = $content;
+            //$article->text = $content;
             continue;
           }
           else if ($titlelink_was_disabled) {
             $content = preg_replace($this->finalpattern, $link, $content, 1);
-            //            $article->text = $content;
+            //$article->text = $content;
             $titlelink_was_disabled = false;
             continue;
           }
