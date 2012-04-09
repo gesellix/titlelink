@@ -94,38 +94,38 @@ The vertical bar '|' tells you to choose one of the options linked together. See
 
 To help you (and me) debugging problems with TitleLink there are some commands available:
 
-*   {ln:enable:false}
+*   {ln:enable:false}<br />
     To disable TitleLink in an article, use the command somewhere inside that article.
-*   {ln:debug:<phrase and other options>}
+*   {ln:debug:<phrase and other options>}<br />
     Lets TitleLink show some debug information, if no link could be built.
 
 ### Examples
 
-1.  {ln:<phrase>}
-    reate simple hyperlink with "phrase" as displayed text
-2.  {ln:nw:<phrase>}
+1.  {ln:<phrase>}<br />
+    create simple hyperlink with "phrase" as displayed text
+2.  {ln:nw:<phrase>}<br />
     create the hyperlink, but with the attribute target="_blank" to open it in a new window
-3.  {ln:\<phrase> '\<title>}
+3.  {ln:\<phrase> '\<title>}<br />
     like 1., but use "title" as displayed text.
-4.  {ln:nw:\<phrase> '\<title>}
+4.  {ln:nw:\<phrase> '\<title>}<br />
     like 3., but open the link in a new window
-5.  {ln:search:\<phrase>}
+5.  {ln:search:\<phrase>}<br />
     create a link which leads to the site-internal search results for \<phrase>
-6.  {ln:google:\<phrase> '\<title>}
+6.  {ln:google:\<phrase> '\<title>}<br />
     create a link which leads to the google search for \<phrase>
-7.  {ln:http://www.eff.org 'Electronic Frontier Foundation}
-    creats and external link to the electronic frontier foundation
-8.  {ln:op:\<phrase>}\<img src="image.gif">\</a>
+7.  {ln:http://www.eff.org 'Electronic Frontier Foundation}<br />
+    creates and external link to the electronic frontier foundation
+8.  {ln:op:\<phrase>}\<img src="image.gif">\</a><br />
     create a hyperlinked image ("op" for "open", because it won't close "</a>" tag)
-9.  {ln:\<phrase> '\<img src="image.jpg" /> ''\<tooltip text>}
+9.  {ln:\<phrase> '\<img src="image.jpg" /> ''\<tooltip text>}<br />
     create a hyperlinked image, linked to \<phrase>, and with \<tooltip text> as tooltip
-10. {ln:css-mainlevel:\<phrase>}
+10. {ln:css-mainlevel:\<phrase>}<br />
     create simple hyperlink with "phrase" as displayed text and "mainlevel" as css class
-11. {ln:search-icq:1234567}
+11. {ln:search-icq:1234567}<br />
     http://wwp.icq.com/1234567 (show site for the ICQ number 1234567)
-12. {ln:search-sourceforge:projects/dotplot/}
+12. {ln:search-sourceforge:projects/dotplot/}<br />
     http://sourceforge.net/projects/dotplot/
-13. {ln:limitstart-2:\<phrase>}
+13. {ln:limitstart-2:\<phrase>}<br />
     like 1., but goes to article page 2.
 
 ### Feedback and Support
