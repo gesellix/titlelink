@@ -4,6 +4,11 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2010-10-05:
+
+- making TitleLink compatible to Joomla 1.6.0.Beta11
+
+
 2010-08-08:
 
 - [#20653] SQL Injection: $phrase is escaped now, yet most of the plugins have to be updated according to plugin_content_title.php

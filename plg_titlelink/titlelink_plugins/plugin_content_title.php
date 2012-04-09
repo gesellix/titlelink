@@ -20,10 +20,9 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
 
   $result = null;
 
-  $query  = "SELECT a.id, a.title AS arttitle, a.alias AS artalias, c.id as catid, c.alias AS catalias, a.sectionid";
+  $query  = "SELECT a.id, a.title AS arttitle, a.alias AS artalias, c.id as catid, c.alias AS catalias";
   $query .= " FROM #__content AS a ";
   $query .= " LEFT JOIN #__categories AS c ON a.catid = c.id ";
-  $query .= " LEFT JOIN #__sections AS s ON a.sectionid = s.id ";
 
   $where_clause = " WHERE a.state=1 ";
 
@@ -55,13 +54,13 @@ function findContentInternal($database, $query_variant, $getTitle)
   $my = $database->loadObject();
   if ($my)
   {
-    if (empty($my->catid) || empty($my->catalias) || empty($my->sectionid))
+    if (empty($my->catid) || empty($my->catalias))
     {
       $result[0] = ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias);
     }
     else
     {
-      $result[0] = ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias, $my->sectionid);
+      $result[0] = ContentHelperRoute::getArticleRoute($my->id.':'.$my->artalias, $my->catid.':'.$my->catalias);
     }
     
     $result[1] = ($getTitle) ? $my->arttitle : $my->artalias;
