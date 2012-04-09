@@ -1,87 +1,305 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<mosinstall type="mambot" group="content">
-  <name>TitleLink</name>
-  <author>Tobias Gesellchen, Marc Perkel</author>
-  <creationDate>2005-07-08</creationDate>
-  <copyright>2005 http://www.gesellix.de/</copyright>
-  <authorEmail>tobias@gesellix.de</authorEmail>
-  <authorUrl>www.gesellix.de</authorUrl>
-  <version>3.0.3 2008-06-29 stable</version>
-  <description><![CDATA[
-    <span style="font-size:medium;">
-      <p style="font-weight:bold;font-size:medium;">Content Plugin for easy creation of hyperlinks (Joomla! 1.0.x).</p>
-      <p>Easily create links within your content, extendible by plugins.</p>
-      <p>After initial installation, your new TitleLink plugin is <strong>not yet active</strong>.
-         To activate it, go to the <a href="index2.php?option=com_mambots&client=">Mambot Manager</a>
-         and click on <strong>publish</strong> to activate this mambot.</p>
-      <p>How to use inside an article:</p>
-      <ul>
-        <li>Just use the command {ln:&lt;phrase&gt;} to create a link using the given &lt;phrase&gt;.</li>
-        <li>You may use the command {ln:&lt;phrase&gt; '&lt;title&gt;} to create a link like above but with the given &lt;title&gt;.</li>
-        <li>The command {ln:nw:&lt;phrase> '&lt;title&gt;} creates a link which opens in a new window.</li>
-      </ul>
-      <p>Further documentation with examples can be found <a href="../mambots/content/titlelink.txt" target="_blank">here</a>.</p>
-      <p>To get further help, feel free to contact the author at <a href="mailto:tobias@gesellix.de?subject=TitleLink">tobias@gesellix.de</a>.</p>
-      <p>&copy; 2005 - 2007 Tobias Gesellchen. <a href="http://www.gesellix.de/" target="_blank">www.gesellix.de</a>.</p>
-      <p>Donations are welcome :) Just visit my <a href="http://www.gesellix.de/" target="_blank">homepage</a> and use the PayPal button.</p>
-    </span>
-    ]]>
-  </description>
-  <files>
-    <filename mambot="titlelink">titlelink.php</filename>
-    <filename>titlelink.txt</filename>
-    <filename>titlelink_plugins/plugin_content_title.php</filename>
-    <filename>titlelink_plugins/plugin_menuitem.php</filename>
-    <filename>titlelink_plugins/plugin_remository.php</filename>
-    <filename>titlelink_plugins/plugin_shortlink.php</filename>
-    <filename>titlelink_plugins/plugin_virtuemart.php</filename>
-  </files>
-  <params name="" description="">
-    <param
-      name="separator"
-      type="text"
-      default=":"
-      label="Separator"
-      description="Default is the colon ':'" />
-    <param
-      name="trigger_prefix"
-      type="text"
-      default="{ln"
-      label="Prefix"
-      description="Default: {ln" />
-    <param
-      name="trigger_suffix"
-      type="text"
-      default="}"
-      label="Suffix"
-      description="Default: }" />
-    <param
-      name="enablenewcontent"
-      type="radio"
-      default="0"
-      label="Link to create new article"
-      description="If no match is found, create a link to add new content.">
-      <option value="1">Enabled</option>
-      <option value="0">Disabled</option>
-    </param>
-    <param
-      name="disp_link"
-      type="list"
-      label="Displayed Link"
-      default="1"
-      description="Options for Displayed Link (if no explicit title entered after ')">
-      <option value="0">Query String</option>
-      <option value="1">Query Result</option>
-     </param>
-    <param
-      name="disp_tooltip"
-      type="list"
-      label="Displayed ToolTip"
-      default="1"
-      description="Options for ToolTip (ALT Text)">
-      <option value="0">Query String</option>
-      <option value="1">Query Result</option>
-      <option value="2">Explicit Title</option>
-     </param>
-  </params>
-</mosinstall>
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system" method="upgrade">
+   <name>System - TitleLink</name>
+   <author>Tobias Gesellchen</author>
+   <creationDate>2008-06-03</creationDate>
+   <copyright>(C) 2005-2011 Tobias Gesellchen. All rights reserved.</copyright>
+   <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+   <authorEmail>tobias@gesellix.de</authorEmail>
+   <authorUrl>www.gesellix.de</authorUrl>
+   <version>3.4.0 2011-08-12 stable</version>
+   <description>DESCTITLELINK</description>
+   <files>
+      <filename plugin="titlelink">titlelink.php</filename>
+      <filename>titlelink_plugins/plugin_content_title.php</filename>
+      <filename>titlelink_plugins/plugin_menuitem.php</filename>
+      <filename>titlelink_plugins/plugin_remository.php</filename>
+      <filename>titlelink_plugins/plugin_shortlink.php</filename>
+      <filename>titlelink_plugins/plugin_virtuemart.php</filename>
+      <filename>titlelink_plugins/plugin_virtuemart_category.php</filename>
+      <filename>titlelink_plugins/plugin_alberghi.php</filename>
+      <filename>titlelink_plugins/plugin_artforms.php</filename>
+      <filename>titlelink_plugins/plugin_docman.php</filename>
+      <filename>titlelink_plugins/plugin_peoplebook.php</filename>
+      <filename>titlelink_plugins/plugin_jmovies.php</filename>
+   </files>
+   <!-- old method to describe language files
+        Generally works
+   -->
+   <!--
+      <languages>
+         <language tag="en-GB">administrator/language/en-GB.plg_system_titlelink.ini</language>
+         <language tag="de-DE">administrator/language/de-DE.plg_system_titlelink.ini</language>
+         <language tag="es-ES">administrator/language/es-ES.plg_system_titlelink.ini</language>
+         <language tag="fa-IR">administrator/language/fa-IR.plg_system_titlelink.ini</language>
+         <language tag="nl-NL">administrator/language/nl-NL.plg_system_titlelink.ini</language>
+         <language tag="ru-RU">administrator/language/ru-RU.plg_system_titlelink.ini</language>
+         <language tag="tr-TR">administrator/language/tr-TR.plg_system_titlelink.ini</language>
+      </languages>
+   -->
+   <!-- new method to describe language files
+       Doesn't work well :-(
+       2007-05-15 Installs only first language
+   -->
+   <languages folder="administrator/language">
+      <language tag="en-GB">en-GB.plg_system_titlelink.ini</language>
+   </languages>
+
+   <params name="" description="">
+      <param
+            name="separator"
+            type="text"
+            default=":"
+            label="Separator"
+            description="Default is the colon ':'"/>
+      <param
+            name="trigger_prefix"
+            type="text"
+            default="{ln"
+            label="Prefix"
+            description="Default: {ln"/>
+      <param
+            name="trigger_suffix"
+            type="text"
+            default="}"
+            label="Suffix"
+            description="Default: }"/>
+      <param name="@spacer" type="spacer" default="" label="" description=""/>
+      <param
+            name="enablepartialmatch"
+            type="radio"
+            default="1"
+            label="Enable partial match"
+            description="If no match is found with the exact search, try partial matching.">
+         <option value="1">Enabled</option>
+         <option value="0">Disabled</option>
+      </param>
+      <param
+            name="enablenewcontent"
+            type="radio"
+            default="0"
+            label="Link to create new article"
+            description="If no match is found, create a link to add new content.">
+         <option value="1">Enabled</option>
+         <option value="0">Disabled</option>
+      </param>
+      <param
+            name="disp_link"
+            type="list"
+            label="Displayed Link"
+            default="1"
+            description="Options for Displayed Link (if no explicit title entered after ')">
+         <option value="0">Query String</option>
+         <option value="1">Query Result</option>
+      </param>
+      <param
+            name="disp_tooltip"
+            type="list"
+            label="Displayed ToolTip"
+            default="1"
+            description="Options for ToolTip (ALT Text)">
+         <option value="0">Query String</option>
+         <option value="1">Query Result</option>
+         <option value="2">Explicit Title</option>
+      </param>
+      <param name="@spacer" type="spacer" default="" label="" description=""/>
+      <param
+            name="plugin_content_title"
+            type="list"
+            default="1"
+            label="Content by Title or Alias"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_menuitem"
+            type="list"
+            default="1"
+            label="Content by Menuitem"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_shortlink"
+            type="list"
+            default="0"
+            label="Content by Shortlink (needs com_shortlink)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_virtuemart"
+            type="list"
+            default="0"
+            label="Content by VirtueMart Product (needs com_virtuemart)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_virtuemart_category"
+            type="list"
+            default="0"
+            label="Content by VirtueMart Category (needs com_virtuemart)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_alberghi"
+            type="list"
+            default="0"
+            label="Content by Alberghi (needs com_alberghi)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_artforms"
+            type="list"
+            default="0"
+            label="Content by ArtForms (needs com_artforms)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_docman"
+            type="list"
+            default="0"
+            label="Content by DocMan (needs com_docman)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_remository"
+            type="list"
+            default="0"
+            label="Content by Remository (needs com_remository)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_peoplebook"
+            type="list"
+            default="0"
+            label="Content by PeopleBook (needs com_peoplebook)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+      <param
+            name="plugin_jmovies"
+            type="list"
+            default="0"
+            label="Content by JMovies (needs com_jmovies)"
+            description="TODO.">
+         <option value="0">Disabled</option>
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+         <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
+         <option value="7">7</option>
+         <option value="8">8</option>
+         <option value="9">9</option>
+         <option value="10">10</option>
+      </param>
+   </params>
+</install>
