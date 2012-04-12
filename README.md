@@ -19,6 +19,8 @@ TitleLink is a Joomla System Plugin to easily create links in Joomla content to 
 By inserting text into your content like {ln:Growing African Violets} you link directly to your content with that title.
 The purpose of this extension is to help create easy ways to drop links to content within the material that you are writing.
 
+TitleLink is a must have to link between Joomla! articles without using cryptic hyperlinks. TitleLink also minimizes the risk of breaking article links when changes are made to the target article. In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.
+
 ### Installation
 
 After installing the plugin through the extension manager be sure to publish the plugin to activate it.
