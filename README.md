@@ -94,10 +94,10 @@ The vertical bar '|' tells you to choose one of the options linked together. See
 
 To help you (and me) debugging problems with TitleLink there are some commands available:
 
-*   {ln:enable:false}<br />
-    To disable TitleLink in an article, use the command somewhere inside that article.
-*   {ln:debug:<phrase and other options>}<br />
-    Lets TitleLink show some debug information, if no link could be built.
+<dl>
+  <dt>{ln:enable:false}</dt><dd>To disable TitleLink in an article, use the command somewhere inside that article.</dd>
+  <dt>{ln:debug:&lt;phrase and other options&gt;}</dt><dd>Lets TitleLink show some debug information, if no link could be built.</dd>
+</dl>
 
 ### Examples
 
