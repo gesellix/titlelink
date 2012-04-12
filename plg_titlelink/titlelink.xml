@@ -7,7 +7,7 @@
    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
    <authorEmail>tobias@gesellix.de</authorEmail>
    <authorUrl>www.gesellix.de</authorUrl>
-   <version>3.5.0 2011-08-12 stable</version>
+   <version>3.5.0 2012-04-12 stable</version>
    <description>DESCTITLELINK</description>
    <files>
       <filename plugin="titlelink">titlelink.php</filename>

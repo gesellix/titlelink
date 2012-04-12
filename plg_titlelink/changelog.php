@@ -4,6 +4,12 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2012-04-12:
+
+- transition from http://joomlacode.org/gf/project/titlelink/ (SVN) to https://github.com/gesellix/titlelink (Git)
+- documentation cleanup
+
+
 2010-10-05:
 
 - making TitleLink compatible to Joomla 1.6.0.Beta11
