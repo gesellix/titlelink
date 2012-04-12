@@ -115,7 +115,7 @@ To help you (and me) debugging problems with TitleLink there are some commands a
     create a link which leads to the google search for&lt;phrase&gt;
 7.  {ln:http://www.eff.org 'Electronic Frontier Foundation}<br />
     creates and external link to the electronic frontier foundation
-8.  {ln:op:&lt;phrase&gt;}&lt;img src="image.gif"/&gt;\&lt;/a&gt;<br />
+8.  {ln:op:&lt;phrase&gt;}&lt;img src="image.gif"/&gt;&lt;/a&gt;<br />
     create a hyperlinked image ("op" for "open", because it won't close "&lt;/a&gt;" tag)
 9.  {ln:&lt;phrase&gt; '&lt;img src="image.jpg" /&gt; ''&lt;tooltip text&gt;}<br />
     create a hyperlinked image, linked to &lt;phrase&gt;, and with &lt;tooltip text&gt; as tooltip
