@@ -77,9 +77,9 @@ The vertical bar '|' tells you to choose one of the options linked together. See
 
 <dl>
   <dt>nw:</dt><dd>"new window" - open links in a new window</dd>
-  <dt>op:</dt><dd>"keep tag open" - supress the closing "&lt;/a&gt;"</dd>
+  <dt>op:</dt><dd>"keep tag open" - supress the closing "&lt;/a&gt;". Useful, when you like to add some inner HTML content.</dd>
   <dt>css-&lt;class&gt;:</dt><dd>set a css-class "&lt;class&gt;"</dd>
-  <dt>search-&lt;selector&gt;:</dt><dd>create a link to an external site/search engine</dd>
+  <dt>search-&lt;selector&gt;:</dt><dd>create a link to an external site/search engine. See below for supported &lt;selector&gt;s</dd>
   <dt>append-&lt;to append&gt;:</dt><dd> append to the link, useful for anchors like in http://www.example.com/index.php#anchor</dd>
   <dt>limitstart-&lt;page&gt;:</dt><dd>selects the page of an article with several pages. &lt;page&gt; starts with 1, which would be the first page of the article (index 0)</dd>
   <dt>itemid-&lt;id&gt;:</dt><dd>appends &lt;id&gt;, when TitleLink wasn't able to get an itemid by Joomla!</dd>
@@ -101,51 +101,51 @@ To help you (and me) debugging problems with TitleLink there are some commands a
 
 ### Examples
 
-1.  {ln:<phrase>}<br />
+1.  {ln:&lt;phrase&gt;}<br />
     create simple hyperlink with "phrase" as displayed text
-2.  {ln:nw:<phrase>}<br />
+2.  {ln:nw:&lt;phrase&gt;}<br />
     create the hyperlink, but with the attribute target="_blank" to open it in a new window
-3.  {ln:\<phrase> '\<title>}<br />
+3.  {ln:&lt;phrase&gt; '&lt;title&gt;}<br />
     like 1., but use "title" as displayed text.
-4.  {ln:nw:\<phrase> '\<title>}<br />
+4.  {ln:nw:&lt;phrase&gt; '&lt;title&gt;}<br />
     like 3., but open the link in a new window
-5.  {ln:search:\<phrase>}<br />
-    create a link which leads to the site-internal search results for \<phrase>
-6.  {ln:google:\<phrase> '\<title>}<br />
-    create a link which leads to the google search for \<phrase>
+5.  {ln:search:&lt;phrase&gt;}<br />
+    create a link which leads to the site-internal search results for &lt;phrase&gt;
+6.  {ln:google:&lt;phrase&gt; '&lt;title&gt;}<br />
+    create a link which leads to the google search for&lt;phrase&gt;
 7.  {ln:http://www.eff.org 'Electronic Frontier Foundation}<br />
     creates and external link to the electronic frontier foundation
-8.  {ln:op:\<phrase>}\<img src="image.gif">\</a><br />
-    create a hyperlinked image ("op" for "open", because it won't close "</a>" tag)
-9.  {ln:\<phrase> '\<img src="image.jpg" /> ''\<tooltip text>}<br />
-    create a hyperlinked image, linked to \<phrase>, and with \<tooltip text> as tooltip
-10. {ln:css-mainlevel:\<phrase>}<br />
+8.  {ln:op:&lt;phrase&gt;}&lt;img src="image.gif"/&gt;\&lt;/a&gt;<br />
+    create a hyperlinked image ("op" for "open", because it won't close "&lt;/a&gt;" tag)
+9.  {ln:&lt;phrase&gt; '&lt;img src="image.jpg" /&gt; ''&lt;tooltip text&gt;}<br />
+    create a hyperlinked image, linked to &lt;phrase&gt;, and with &lt;tooltip text&gt; as tooltip
+10. {ln:css-mainlevel:&lt;phrase&gt;}<br />
     create simple hyperlink with "phrase" as displayed text and "mainlevel" as css class
 11. {ln:search-icq:1234567}<br />
     http://wwp.icq.com/1234567 (show site for the ICQ number 1234567)
 12. {ln:search-sourceforge:projects/dotplot/}<br />
     http://sourceforge.net/projects/dotplot/
-13. {ln:limitstart-2:\<phrase>}<br />
+13. {ln:limitstart-2:&lt;phrase&gt;}<br />
     like 1., but goes to article page 2.
 
 ### Feedback and Support
 
 Tobias Gesellchen (tobias@gesellix.de) is the main programmer.
 Marc Perkel (marc@perkel.com) is the documentation guy.
-We welcome your ideas and feedback on the program. Please use the [Tracker](http://joomlacode.org/gf/project/titlelink/tracker/) for feature suggestions or to submit bug reports.
+We welcome your ideas and feedback on the program. Please use the [Tracker](https://github.com/gesellix/titlelink/issues) for feature suggestions or to submit bug reports.
 
 ### License
 
 The TitleLink content plugin is released under the GPL License.
 
-### Available site selectors for the search-\<site> command
+### Available site selectors for the search-&lt;site&gt; command
 
 (from http://tavi.sourceforge.net/InterWiki)
 
 <table>
   <tr><th>&lt;site&gt;</th><th>target link</th></tr>
   <tr><td>abbenormal</td><td>http://www.ourpla.net/cgi-bin/pikie.cgi?&lt;phrase&gt;</td></tr>
-  <tr><td>acronym</td><td>http://www.acronymfinder.com/af-query.asp?String=exact&Acronym=&lt;phrase&gt;</td></tr>
+  <tr><td>acronym</td><td>http://www.acronymfinder.com/af-query.asp?String=exact&amp;Acronym=&lt;phrase&gt;</td></tr>
   <tr><td>advogato</td><td>http://www.advogato.org/&lt;phrase&gt;</td></tr>
   <tr><td>bible</td><td>http://bible.gospelcom.net/bible?&lt;phrase&gt;</td></tr>
   <tr><td>caffeinatedwiki</td><td>http://socrates.yi.org/&lt;phrase&gt;</td></tr>
@@ -168,7 +168,7 @@ The TitleLink content plugin is released under the GPL License.
   <tr><td>iawiki</td><td>http://www.IAwiki.net/&lt;phrase&gt;</td></tr>
   <tr><td>icq</td><td>http://wwp.icq.com/&lt;phrase&gt;</td></tr>
   <tr><td>imdb</td><td>http://us.imdb.com/Title?&lt;phrase&gt;</td></tr>
-  <tr><td>jargonfile</td><td>http://sunir.org/apps/meta.pl?wiki=JargonFile&redirect=&lt;phrase&gt;</td></tr>
+  <tr><td>jargonfile</td><td>http://sunir.org/apps/meta.pl?wiki=JargonFile&amp;redirect=&lt;phrase&gt;</td></tr>
   <tr><td>jtf</td><td>http://www.justthefaqs.org/?page=&lt;phrase&gt;</td></tr>
   <tr><td>knowhow</td><td>http://www2.iro.umontreal.ca/~paquetse/cgi-bin/wiki.cgi?&lt;phrase&gt;</td></tr>
   <tr><td>kwiki</td><td>http://kwiki.org/?&lt;phrase&gt;</td></tr>
@@ -180,7 +180,7 @@ The TitleLink content plugin is released under the GPL License.
   <tr><td>openwiki</td><td>http://openwiki.com/ow.asp?&lt;phrase&gt;</td></tr>
   <tr><td>orgpatterns</td><td>http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns?&lt;phrase&gt;</td></tr>
   <tr><td>patent</td><td>http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=&lt;phrase&gt;</td></tr>
-  <tr><td>pgpkey</td><td>http://keys.pgp.dk:11371/pks/lookup?op=get&search=&lt;phrase&gt;</td></tr>
+  <tr><td>pgpkey</td><td>http://keys.pgp.dk:11371/pks/lookup?op=get&amp;search=&lt;phrase&gt;</td></tr>
   <tr><td>phpwiki</td><td>http://phpwiki.sourceforge.net/phpwiki/&lt;phrase&gt;</td></tr>
   <tr><td>pikie</td><td>http://pikie.webbing.nl/cgi-bin/pikie.cgi?&lt;phrase&gt;</td></tr>
   <tr><td>ppr</td><td>http://c2.com/cgi/wiki?&lt;phrase&gt;</td></tr>
@@ -190,7 +190,7 @@ The TitleLink content plugin is released under the GPL License.
   <tr><td>squeak</td><td>http://minnow.cc.gatech.edu/squeak/&lt;phrase&gt;</td></tr>
   <tr><td>squirrelmail</td><td>http://squirrelmail.org/wiki/wiki.php?&lt;phrase&gt;</td></tr>
   <tr><td>tavi</td><td>http://tavi.sourceforge.net/&lt;phrase&gt;</td></tr>
-  <tr><td>thesaurus</td><td>http://www.thesaurus.com/cgi-bin/search?config=roget&words=&lt;phrase&gt;</td></tr>
+  <tr><td>thesaurus</td><td>http://www.thesaurus.com/cgi-bin/search?config=roget&amp;words=&lt;phrase&gt;</td></tr>
   <tr><td>thinki</td><td>http://www.thinkware.se/cgi-bin/thinki.cgi/&lt;phrase&gt;</td></tr>
   <tr><td>twiki</td><td>http://twiki.sourceforge.net/cgi-bin/view/&lt;phrase&gt;</td></tr>
   <tr><td>usemod</td><td>http://www.usemod.com/cgi-bin/wiki.pl?&lt;phrase&gt;</td></tr>
@@ -198,7 +198,7 @@ The TitleLink content plugin is released under the GPL License.
   <tr><td>webster</td><td>http://m-w.com/cgi-bin/dictionary?va=&lt;phrase&gt;</td></tr>
   <tr><td>why</td><td>http://clublet.com/c/c/why?&lt;phrase&gt;</td></tr>
   <tr><td>wiki</td><td>http://c2.com/cgi/wiki?&lt;phrase&gt;</td></tr>
-  <tr><td>wikifind</td><td>http://c2.com/cgi/wiki?FindPage&value=&lt;phrase&gt;</td></tr>
+  <tr><td>wikifind</td><td>http://c2.com/cgi/wiki?FindPage&amp;value=&lt;phrase&gt;</td></tr>
   <tr><td>wikipedia</td><td>http://en.wikipedia.org/wiki/&lt;phrase&gt;</td></tr>
   <tr><td>wiktionary</td><td>http://en.wiktionary.org/wiki/&lt;phrase&gt;</td></tr>
   <tr><td>wunderground</td><td>http://www.wunderground.com/cgi-bin/findweather/getForecast?query=&lt;phrase&gt;</td></tr>
