@@ -15,13 +15,13 @@ Written by [Tobias Gesellchen](http://www.gesellix.de/) with help on the documen
 
 ### Description
 
-TitleLink is a Joomla Content Plugin to easily create links in Joomla content to other Joomla content by Title or Alias.
+TitleLink is a Joomla System Plugin to easily create links in Joomla content to other Joomla content by Title or Alias.
 By inserting text into your content like {ln:Growing African Violets} you link directly to your content with that title.
-The purpose of this program is to help create easy ways to drop links to content within the material that you are writing.
+The purpose of this extension is to help create easy ways to drop links to content within the material that you are writing.
 
 ### Installation
 
-After installing the plugin through Extensions/Install be sure to publish the plugin to activate it.
+After installing the plugin through the extension manager be sure to publish the plugin to activate it.
 Publishing the plugin is the way you turn it on.
 
 ### Using TitleLink
@@ -29,41 +29,40 @@ Publishing the plugin is the way you turn it on.
 TitleLink is used by dropping shortcut references into your content that you are writing.
 Suppose that you have written and published an article called "Growing African Violets".
 You are now writing a new article about plants you can grow indoors, and you want to reference and link to your African Violet article.
-You might use it this way: "If you don't have a lot of natural light you might try {ln:growing African Violets}."
+You might use it this way: "If you don't have a lot of natural light you might try {ln:Growing African Violets}."
+Basically, you use the target article title and wrap it between two curly braces and the prefix "ln:", which is short for "link:".
 
 When the web page is displayed it will link to your article on violets.
 Suppose however that the text you want to display isn't the same as the title you want to link to.
 You can do it this way: "In low light I had good luck raising {ln:growing african violets 'violets} indoors."
 This will show the link as "violets" but point to the content with the title "growing african violets".
+Linking isn't case sensitive so you don't have to match case to make the link work.
 
 Linking is not limited to the title. You can link to the title\_alias field as well.
 If you used the word "violets" by itself in the title\_alias then all you would have to do to link to it is {ln:violets}.
-
-Linking isn't cases sensitive so you don't have to match case to make the link work.
 
 When using JoomFish you always have to keep in mind that the translated titles aren't found by TitleLink.
 That means you have to use the titles of the original articles even in the translated versions.
 TitleLink only finds the original article, JoomFish changes it to the translated one.
 
-Adding "nw:" tells TitleLink to open the link in a new window.
-
-By default, TitleLink will retry a search in all installed plugins.
+By default, TitleLink will retry a search in all installed and activated plugins as configured in the plugin configuration.
 This second try will search for partial matches, so one could have an article titled "One Two Three",
 and a TitleLink {ln:one two} would find that article. To disable the retry, just use "em:" (for "exact match") as in {ln:em:one two}.
+Using the title\_alias can be more convenient, when you have similar articles with similar titles. In such cases
+it can be useful not only for TitleLink to manually set a unique title\_alias.
 
 When the second try was a hit, TitleLink will use your partial phrase (e.g. "one two") as the displayed text.
 To let TitleLink replace your phrase with the correct title of the article, use "rep:" (for "replace") as option.
 {ln:rep:one two} would then create a link with "One Two Three" as displayed text.
 
-TitleLink can be used as a shortcut for creating external links.
-Rather than just putting a URL in your text you can easilly turn it into a link as follows: {ln:http://joomlacode.org/gf/project/titlelink/}
+TitleLink can be used as a shortcut for creating external links, too.
+Rather than just putting a complete HTML anchor tag in your text you can easilly turn it into a link as follows: {ln:http://joomlacode.org/gf/project/titlelink/}
 
-You can even have the link open a new window with the nw: modifier. {ln:nw:http://joomlacode.org/gf/project/titlelink/}
+You can even have links open a new window with the nw: modifier. {ln:nw:http://joomlacode.org/gf/project/titlelink/}
 
-Suppose however you want it to display something else. Here how you would do that: {ln:nw:http://joomlacode.org/gf/project/titlelink/ 'TitleLink at JoomlaCode}
+Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:http://joomlacode.org/gf/project/titlelink/ 'TitleLink at JoomlaCode}
 
-You can even create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
-
+You can create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
 Other sites which support keywords are called by using the command search-<selector> where <selector> is one of the sites listed at the end of this document.
 
 See the syntax and examples section for details!
@@ -76,19 +75,20 @@ The vertical bar '|' tells you to choose one of the options linked together. See
 
 {ln\[:\]\[debug:\]\[nw:\]\[op:\]\[css-<class>:\]\[search-<selector>:\]\[append-<to append>:\]\[limitstart-<page>\]\[itemid-<id>:\]\[<search|google|yahoo|wikipedia|em|rep>:\]<link/phrase>\[ '<text to display>\[ ''<tooltip to display>\]\]}
 
-*   Entries in square brackets are optional.
-*   nw: "new window" - open links in a new window
-*   op: "keep tag open" - supress the closing "</a>"
-*   css-<class>: set a css-class "<class>"
-*   search-<selector>: create a link to an external site/search engine
-*   append-<to append>: append to the link, useful for anchors like in http://www.example.com/index.php#anchor
-*   limitstart-<page>: selects the page of an article with several pages. <page> starts with 1, which would be the first page of the article (index 0)
-*   itemid-<id>: appends <id>, when TitleLink wasn't able to get an itemid by Joomla!
-*   search: create a link to a site-internal search
-*   google/yahoo: create link to a search by the search engine
-*   wikipedia: create a search link for the english version of the wikipedia
-*   em: "exact match" - disable searching for partial matches
-*   rep: "replace title" - if a partial match was found and no <text to display> was given, display the complete title
+<dl>
+  <dt>nw:</dt><dd>"new window" - open links in a new window</dd>
+  <dt>op:</dt><dd>"keep tag open" - supress the closing "</a>"</dd>
+  <dt>css-<class>:</dt><dd>set a css-class "<class>"</dd>
+  <dt>search-<selector>:</dt><dd>create a link to an external site/search engine</dd>
+  <dt>append-<to append>:</dt><dd> append to the link, useful for anchors like in http://www.example.com/index.php#anchor</dd>
+  <dt>limitstart-<page>:</dt><dd>selects the page of an article with several pages. <page> starts with 1, which would be the first page of the article (index 0)</dd>
+  <dt>itemid-<id>:</dt><dd>appends <id>, when TitleLink wasn't able to get an itemid by Joomla!</dd>
+  <dt>search:</dt><dd>create a link to a site-internal search</dd>
+  <dt>google/yahoo:</dt><dd>create link to a search by the search engine</dd>
+  <dt>wikipedia:</dt><dd>create a search link for the english version of the wikipedia</dd>
+  <dt>em:</dt><dd>"exact match" - disable searching for partial matches</dd>
+  <dt>rep:</dt><dd>"replace title" - if a partial match was found and no <text to display> was given, display the complete title</dd>
+</dl>
 
 ### Debugging
 
