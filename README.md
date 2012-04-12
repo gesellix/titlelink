@@ -63,7 +63,7 @@ You can even have links open a new window with the nw: modifier. {ln:nw:http://j
 Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:http://joomlacode.org/gf/project/titlelink/ 'TitleLink at JoomlaCode}
 
 You can create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
-Other sites which support keywords are called by using the command search-<selector> where <selector> is one of the sites listed at the end of this document.
+Other sites which support keywords are called by using the command search-&lt;selector&gt; where &lt;selector&gt; is one of the sites listed at the end of this document.
 
 See the syntax and examples section for details!
 
@@ -73,21 +73,21 @@ TitleLink provides a syntax like follows. The examples use the default settings 
 Parameters in square brackets '\[' and '\]' are optional, angle brackets '<' and '>' are obligatory.
 The vertical bar '|' tells you to choose one of the options linked together. See the examples for a less technical description.
 
-{ln\[:\]\[debug:\]\[nw:\]\[op:\]\[css-<class>:\]\[search-<selector>:\]\[append-<to append>:\]\[limitstart-<page>\]\[itemid-<id>:\]\[<search|google|yahoo|wikipedia|em|rep>:\]<link/phrase>\[ '<text to display>\[ ''<tooltip to display>\]\]}
+{ln\[:\]\[debug:\]\[nw:\]\[op:\]\[css-&lt;class&gt;:\]\[search-&lt;selector&gt;:\]\[append-&lt;to append&gt;:\]\[limitstart-&lt;page&gt;\]\[itemid-&lt;id&gt;:\]\[&lt;search|google|yahoo|wikipedia|em|rep&gt;:\]&lt;link/phrase&gt;\[ '&lt;text to display&gt;\[ ''&lt;tooltip to display&gt;\]\]}
 
 <dl>
   <dt>nw:</dt><dd>"new window" - open links in a new window</dd>
-  <dt>op:</dt><dd>"keep tag open" - supress the closing "</a>"</dd>
-  <dt>css-<class>:</dt><dd>set a css-class "<class>"</dd>
-  <dt>search-<selector>:</dt><dd>create a link to an external site/search engine</dd>
-  <dt>append-<to append>:</dt><dd> append to the link, useful for anchors like in http://www.example.com/index.php#anchor</dd>
-  <dt>limitstart-<page>:</dt><dd>selects the page of an article with several pages. <page> starts with 1, which would be the first page of the article (index 0)</dd>
-  <dt>itemid-<id>:</dt><dd>appends <id>, when TitleLink wasn't able to get an itemid by Joomla!</dd>
+  <dt>op:</dt><dd>"keep tag open" - supress the closing "&lt;/a&gt;"</dd>
+  <dt>css-&lt;class&gt;:</dt><dd>set a css-class "&lt;class&gt;"</dd>
+  <dt>search-&lt;selector&gt;:</dt><dd>create a link to an external site/search engine</dd>
+  <dt>append-&lt;to append&gt;:</dt><dd> append to the link, useful for anchors like in http://www.example.com/index.php#anchor</dd>
+  <dt>limitstart-&lt;page&gt;:</dt><dd>selects the page of an article with several pages. &lt;page&gt; starts with 1, which would be the first page of the article (index 0)</dd>
+  <dt>itemid-&lt;id&gt;:</dt><dd>appends &lt;id&gt;, when TitleLink wasn't able to get an itemid by Joomla!</dd>
   <dt>search:</dt><dd>create a link to a site-internal search</dd>
   <dt>google/yahoo:</dt><dd>create link to a search by the search engine</dd>
   <dt>wikipedia:</dt><dd>create a search link for the english version of the wikipedia</dd>
   <dt>em:</dt><dd>"exact match" - disable searching for partial matches</dd>
-  <dt>rep:</dt><dd>"replace title" - if a partial match was found and no <text to display> was given, display the complete title</dd>
+  <dt>rep:</dt><dd>"replace title" - if a partial match was found and no &lt;text to display&gt; was given, display the complete title</dd>
 </dl>
 
 ### Debugging
