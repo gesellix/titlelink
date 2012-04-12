@@ -126,7 +126,7 @@ To help you (and me) debugging problems with TitleLink there are some commands a
 12. {ln:search-sourceforge:projects/dotplot/}<br />
     http://sourceforge.net/projects/dotplot/
 13. {ln:limitstart-2:&lt;phrase&gt;}<br />
-    like 1., but goes to article page 2.
+    like example 1., but goes to article page 2.
 
 ### Feedback and Support
 
