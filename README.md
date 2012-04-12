@@ -4,12 +4,12 @@ Written by [Tobias Gesellchen](http://www.gesellix.de/) with help on the documen
 
 ### Web links
 
-[Project description](http://extensions.joomla.org/component/option,com\_mtree/task,viewlink/link\_id,427/Itemid,35/),
+[Joomla Extensions Directory](http://extensions.joomla.org/component/option,com\_mtree/task,viewlink/link\_id,427/Itemid,35/),
 
-[Project site](http://joomlacode.org/gf/project/titlelink/),
-[Download](http://joomlacode.org/gf/project/titlelink/frs/),
-[Forum](http://joomlacode.org/gf/project/titlelink/forum/),
-[Tracker](http://joomlacode.org/gf/project/titlelink/tracker/)
+[Project site](https://github.com/gesellix/titlelink),
+[Download](https://github.com/gesellix/titlelink/downloads),
+[Wiki](https://github.com/gesellix/titlelink/wiki),
+[Tracker](https://github.com/gesellix/titlelink/issues)
 
 [Private homepage](http://www.gesellix.de/)
 
