@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Titlelink : Joomla! TitleLink plugin" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Titlelink</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/gesellix/titlelink">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Titlelink</h1>
+          <h2 id="project_tagline">Joomla! TitleLink plugin</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/gesellix/titlelink/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/gesellix/titlelink/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>TitleLink content plugin</h1>
+
+<p>Written by <a href="http://www.gesellix.de/">Tobias Gesellchen</a> with help on the documentation by <a href="http://www.perkel.com/">Marc Perkel</a>.</p>
+
+<h3>Web links</h3>
+
+<p><a href="http://extensions.joomla.org/component/option,com_mtree/task,viewlink/link_id,427/Itemid,35/">Joomla Extensions Directory</a>,</p>
+
+<p><a href="https://github.com/gesellix/titlelink">Project site</a>,
+<a href="https://github.com/gesellix/titlelink/downloads">Download</a>,
+<a href="https://github.com/gesellix/titlelink/wiki">Wiki</a>,
+<a href="https://github.com/gesellix/titlelink/issues">Tracker</a></p>
+
+<p><a href="http://www.gesellix.de/">Private homepage</a></p>
+
+<h3>Description</h3>
+
+<p>TitleLink is a Joomla System Plugin to easily create links in Joomla content to other Joomla content by Title or Alias.
+By inserting text into your content like {ln:Growing African Violets} you link directly to your content with that title.
+The purpose of this extension is to help create easy ways to drop links to content within the material that you are writing.</p>
+
+<p>TitleLink is a must have to link between Joomla! articles without using cryptic hyperlinks. TitleLink also minimizes the risk of breaking article links when changes are made to the target article. In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.</p>
+
+<h3>Installation</h3>
+
+<p>After installing the plugin through the extension manager be sure to publish the plugin to activate it.
+Publishing the plugin is the way you turn it on.</p>
+
+<h3>Using TitleLink</h3>
+
+<p>TitleLink is used by dropping shortcut references into your content that you are writing.
+Suppose that you have written and published an article called "Growing African Violets".
+You are now writing a new article about plants you can grow indoors, and you want to reference and link to your African Violet article.
+You might use it this way: "If you don't have a lot of natural light you might try {ln:Growing African Violets}."
+Basically, you use the target article title and wrap it between two curly braces and the prefix "ln:", which is short for "link:".</p>
+
+<p>When the web page is displayed it will link to your article on violets.
+Suppose however that the text you want to display isn't the same as the title you want to link to.
+You can do it this way: "In low light I had good luck raising {ln:growing african violets 'violets} indoors."
+This will show the link as "violets" but point to the content with the title "growing african violets".
+Linking isn't case sensitive so you don't have to match case to make the link work.</p>
+
+<p>Linking is not limited to the title. You can link to the title_alias field as well.
+If you used the word "violets" by itself in the title_alias then all you would have to do to link to it is {ln:violets}.</p>
+
+<p>When using JoomFish you always have to keep in mind that the translated titles aren't found by TitleLink.
+That means you have to use the titles of the original articles even in the translated versions.
+TitleLink only finds the original article, JoomFish changes it to the translated one.</p>
+
+<p>By default, TitleLink will retry a search in all installed and activated plugins as configured in the plugin configuration.
+This second try will search for partial matches, so one could have an article titled "One Two Three",
+and a TitleLink {ln:one two} would find that article. To disable the retry, just use "em:" (for "exact match") as in {ln:em:one two}.
+Using the title_alias can be more convenient, when you have similar articles with similar titles. In such cases
+it can be useful not only for TitleLink to manually set a unique title_alias.</p>
+
+<p>When the second try was a hit, TitleLink will use your partial phrase (e.g. "one two") as the displayed text.
+To let TitleLink replace your phrase with the correct title of the article, use "rep:" (for "replace") as option.
+{ln:rep:one two} would then create a link with "One Two Three" as displayed text.</p>
+
+<p>TitleLink can be used as a shortcut for creating external links, too.
+Rather than just putting a complete HTML anchor tag in your text you can easilly turn it into a link as follows: {ln:<a href="http://joomlacode.org/gf/project/titlelink/">http://joomlacode.org/gf/project/titlelink/</a>}</p>
+
+<p>You can even have links open a new window with the nw: modifier. {ln:nw:<a href="http://joomlacode.org/gf/project/titlelink/">http://joomlacode.org/gf/project/titlelink/</a>}</p>
+
+<p>Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:<a href="http://joomlacode.org/gf/project/titlelink/">http://joomlacode.org/gf/project/titlelink/</a> 'TitleLink at JoomlaCode}</p>
+
+<p>You can create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
+Other sites which support keywords are called by using the command search-&lt;selector&gt; where &lt;selector&gt; is one of the sites listed at the end of this document.</p>
+
+<p>See the syntax and examples section for details!</p>
+
+<h3>Syntax</h3>
+
+<p>TitleLink provides a syntax like follows. The examples use the default settings for prefix and suffix.
+Parameters in square brackets '[' and ']' are optional, angle brackets '&lt;' and '&gt;' are obligatory.
+The vertical bar '|' tells you to choose one of the options linked together. See the examples for a less technical description.</p>
+
+<p>{ln[:][debug:][nw:][op:][css-&lt;class&gt;:][search-&lt;selector&gt;:][append-&lt;to append&gt;:][limitstart-&lt;page&gt;][itemid-&lt;id&gt;:][&lt;search|google|yahoo|wikipedia|em|rep&gt;:]&lt;link/phrase&gt;[ '&lt;text to display&gt;[ ''&lt;tooltip to display&gt;]]}</p>
+
+<dl>
+<dt>nw:</dt>
+<dd>"new window" - open links in a new window</dd>
+  <dt>op:</dt>
+<dd>"keep tag open" - supress the closing "&lt;/a&gt;". Useful, when you like to add some inner HTML content.</dd>
+  <dt>css-&lt;class&gt;:</dt>
+<dd>set a css-class "&lt;class&gt;"</dd>
+  <dt>search-&lt;selector&gt;:</dt>
+<dd>create a link to an external site/search engine. See below for supported &lt;selector&gt;s</dd>
+  <dt>append-&lt;to append&gt;:</dt>
+<dd> append to the link, useful for anchors like in <a href="http://www.example.com/index.php#anchor">http://www.example.com/index.php#anchor</a></dd>
+  <dt>limitstart-&lt;page&gt;:</dt>
+<dd>selects the page of an article with several pages. &lt;page&gt; starts with 1, which would be the first page of the article (index 0)</dd>
+  <dt>itemid-&lt;id&gt;:</dt>
+<dd>appends &lt;id&gt;, when TitleLink wasn't able to get an itemid by Joomla!</dd>
+  <dt>search:</dt>
+<dd>create a link to a site-internal search</dd>
+  <dt>google/yahoo:</dt>
+<dd>create link to a search by the search engine</dd>
+  <dt>wikipedia:</dt>
+<dd>create a search link for the english version of the wikipedia</dd>
+  <dt>em:</dt>
+<dd>"exact match" - disable searching for partial matches</dd>
+  <dt>rep:</dt>
+<dd>"replace title" - if a partial match was found and no &lt;text to display&gt; was given, display the complete title</dd>
+</dl><h3>Debugging</h3>
+
+<p>To help you (and me) debugging problems with TitleLink there are some commands available:</p>
+
+<dl>
+<dt>{ln:enable:false}</dt>
+<dd>To disable TitleLink in an article, use the command somewhere inside that article.</dd>
+  <dt>{ln:debug:&lt;phrase and other options&gt;}</dt>
+<dd>Lets TitleLink show some debug information, if no link could be built.</dd>
+</dl><h3>Examples</h3>
+
+<ol>
+<li> {ln:&lt;phrase&gt;}<br>
+create simple hyperlink with "phrase" as displayed text</li>
+<li> {ln:nw:&lt;phrase&gt;}<br>
+create the hyperlink, but with the attribute target="_blank" to open it in a new window</li>
+<li> {ln:&lt;phrase&gt; '&lt;title&gt;}<br>
+like 1., but use "title" as displayed text.</li>
+<li> {ln:nw:&lt;phrase&gt; '&lt;title&gt;}<br>
+like 3., but open the link in a new window</li>
+<li> {ln:search:&lt;phrase&gt;}<br>
+create a link which leads to the site-internal search results for &lt;phrase&gt;</li>
+<li> {ln:google:&lt;phrase&gt; '&lt;title&gt;}<br>
+create a link which leads to the google search for&lt;phrase&gt;</li>
+<li> {ln:<a href="http://www.eff.org">http://www.eff.org</a> 'Electronic Frontier Foundation}<br>
+creates and external link to the electronic frontier foundation</li>
+<li> {ln:op:&lt;phrase&gt;}&lt;img src="image.gif"/&gt;&lt;/a&gt;<br>
+create a hyperlinked image ("op" for "open", because it won't close "&lt;/a&gt;" tag)</li>
+<li> {ln:&lt;phrase&gt; '&lt;img src="image.jpg" /&gt; ''&lt;tooltip text&gt;}<br>
+create a hyperlinked image, linked to &lt;phrase&gt;, and with &lt;tooltip text&gt; as tooltip</li>
+<li>{ln:css-mainlevel:&lt;phrase&gt;}<br>
+create simple hyperlink with "phrase" as displayed text and "mainlevel" as css class</li>
+<li>{ln:search-icq:1234567}<br>
+<a href="http://wwp.icq.com/1234567">http://wwp.icq.com/1234567</a> (show site for the ICQ number 1234567)</li>
+<li>{ln:search-sourceforge:projects/dotplot/}<br>
+<a href="http://sourceforge.net/projects/dotplot/">http://sourceforge.net/projects/dotplot/</a></li>
+<li>{ln:limitstart-2:&lt;phrase&gt;}<br>
+like example 1., but goes to article page 2.</li>
+</ol><h3>Feedback and Support</h3>
+
+<p>Tobias Gesellchen (tobias@gesellix.de) is the main programmer.
+Marc Perkel (marc@perkel.com) is the documentation guy.
+We welcome your ideas and feedback on the program. Please use the <a href="https://github.com/gesellix/titlelink/issues">Tracker</a> for feature suggestions or to submit bug reports.</p>
+
+<h3>License</h3>
+
+<p>The TitleLink content plugin is released under the GPL License.</p>
+
+<h3>Available site selectors for the search-&lt;site&gt; command</h3>
+
+<p>(from <a href="http://tavi.sourceforge.net/InterWiki">http://tavi.sourceforge.net/InterWiki</a>)</p>
+
+<table>
+<tr>
+<th>&lt;site&gt;</th>
+<th>target link</th>
+</tr>
+<tr>
+<td>abbenormal</td>
+<td><a href="http://www.ourpla.net/cgi-bin/pikie.cgi?&lt;phrase">http://www.ourpla.net/cgi-bin/pikie.cgi?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>acronym</td>
+<td><a href="http://www.acronymfinder.com/af-query.asp?String=exact&amp;Acronym=&lt;phrase">http://www.acronymfinder.com/af-query.asp?String=exact&amp;Acronym=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>advogato</td>
+<td><a href="http://www.advogato.org/&lt;phrase">http://www.advogato.org/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>bible</td>
+<td><a href="http://bible.gospelcom.net/bible?&lt;phrase">http://bible.gospelcom.net/bible?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>caffeinatedwiki</td>
+<td><a href="http://socrates.yi.org/&lt;phrase">http://socrates.yi.org/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>cliki</td>
+<td><a href="http://www.cliki.net/&lt;phrase">http://www.cliki.net/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>cmwiki</td>
+<td><a href="http://www.cmwiki.com/&lt;phrase">http://www.cmwiki.com/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>creationmatters</td>
+<td><a href="http://www.ourpla.net/cgi-bin/wiki.pl?&lt;phrase">http://www.ourpla.net/cgi-bin/wiki.pl?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>cssdiscusswiki</td>
+<td><a href="http://css-discuss.incutio.com/?page=&lt;phrase">http://css-discuss.incutio.com/?page=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>dictionary</td>
+<td><a href="http://www.dictionary.com/cgi-bin/dict.pl?term=&lt;phrase">http://www.dictionary.com/cgi-bin/dict.pl?term=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>doiwalters</td>
+<td><a href="http://www.doiwalters.com/wiki/&lt;phrase">http://www.doiwalters.com/wiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>emacswiki</td>
+<td><a href="http://www.emacswiki.org/cgi-bin/wiki/&lt;phrase">http://www.emacswiki.org/cgi-bin/wiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>everything2</td>
+<td><a href="http://www.everything2.com/&lt;phrase">http://www.everything2.com/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>foldoc</td>
+<td><a href="http://www.foldoc.org/foldoc/foldoc.cgi?&lt;phrase">http://www.foldoc.org/foldoc/foldoc.cgi?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>foxwiki</td>
+<td><a href="http://fox.wikis.com/wc.dll?Wiki~&lt;phrase">http://fox.wikis.com/wc.dll?Wiki~&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>geekido</td>
+<td><a href="http://geekido.org/index.php?page=&lt;phrase">http://geekido.org/index.php?page=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>google</td>
+<td><a href="http://www.google.com/search?q=&lt;phrase">http://www.google.com/search?q=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>googlegroups</td>
+<td><a href="http://groups.google.com/groups?q=&lt;phrase">http://groups.google.com/groups?q=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>h2g2</td>
+<td><a href="http://www.bbc.co.uk/h2g2/guide/Search?searchstring=&lt;phrase">http://www.bbc.co.uk/h2g2/guide/Search?searchstring=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>hootoo</td>
+<td><a href="http://www.bbc.co.uk/h2g2/guide/Search?searchstring=&lt;phrase">http://www.bbc.co.uk/h2g2/guide/Search?searchstring=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>hhgg</td>
+<td><a href="http://www.bbc.co.uk/dna/h2g2/&lt;phrase">http://www.bbc.co.uk/dna/h2g2/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>iawiki</td>
+<td><a href="http://www.IAwiki.net/&lt;phrase">http://www.IAwiki.net/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>icq</td>
+<td><a href="http://wwp.icq.com/&lt;phrase">http://wwp.icq.com/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>imdb</td>
+<td><a href="http://us.imdb.com/Title?&lt;phrase">http://us.imdb.com/Title?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>jargonfile</td>
+<td><a href="http://sunir.org/apps/meta.pl?wiki=JargonFile&amp;redirect=&lt;phrase">http://sunir.org/apps/meta.pl?wiki=JargonFile&amp;redirect=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>jtf</td>
+<td><a href="http://www.justthefaqs.org/?page=&lt;phrase">http://www.justthefaqs.org/?page=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>knowhow</td>
+<td><a href="http://www2.iro.umontreal.ca/~paquetse/cgi-bin/wiki.cgi?&lt;phrase">http://www2.iro.umontreal.ca/~paquetse/cgi-bin/wiki.cgi?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>kwiki</td>
+<td><a href="http://kwiki.org/?&lt;phrase">http://kwiki.org/?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>linuxquestions</td>
+<td><a href="http://wiki.linuxquestions.org/wiki/&lt;phrase">http://wiki.linuxquestions.org/wiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>livejournal</td>
+<td><a href="http://www.livejournal.com/users/&lt;phrase">http://www.livejournal.com/users/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>meatball</td>
+<td><a href="http://www.usemod.com/cgi-bin/mb.pl?&lt;phrase">http://www.usemod.com/cgi-bin/mb.pl?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>metawiki</td>
+<td><a href="http://sunir.org/apps/meta.pl?words=&lt;phrase">http://sunir.org/apps/meta.pl?words=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>moinmoin</td>
+<td><a href="http://moinmoin.wikiwikiweb.de/&lt;phrase">http://moinmoin.wikiwikiweb.de/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>openwiki</td>
+<td><a href="http://openwiki.com/ow.asp?&lt;phrase">http://openwiki.com/ow.asp?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>orgpatterns</td>
+<td><a href="http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns?&lt;phrase">http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>patent</td>
+<td><a href="http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=&lt;phrase">http://patft.uspto.gov/netacgi/nph-Parser?patentnumber=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>pgpkey</td>
+<td><a href="http://keys.pgp.dk:11371/pks/lookup?op=get&amp;search=&lt;phrase">http://keys.pgp.dk:11371/pks/lookup?op=get&amp;search=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>phpwiki</td>
+<td><a href="http://phpwiki.sourceforge.net/phpwiki/&lt;phrase">http://phpwiki.sourceforge.net/phpwiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>pikie</td>
+<td><a href="http://pikie.webbing.nl/cgi-bin/pikie.cgi?&lt;phrase">http://pikie.webbing.nl/cgi-bin/pikie.cgi?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>ppr</td>
+<td><a href="http://c2.com/cgi/wiki?&lt;phrase">http://c2.com/cgi/wiki?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>pythoninfo</td>
+<td><a href="http://www.python.org/cgi-bin/moinmoin/&lt;phrase">http://www.python.org/cgi-bin/moinmoin/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>rfc</td>
+<td><a href="http://www.rfc.org.uk/cgi-bin/lookup.cgi?rfc=&lt;phrase">http://www.rfc.org.uk/cgi-bin/lookup.cgi?rfc=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>sourceforge</td>
+<td><a href="http://sourceforge.net/&lt;phrase">http://sourceforge.net/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>squeak</td>
+<td><a href="http://minnow.cc.gatech.edu/squeak/&lt;phrase">http://minnow.cc.gatech.edu/squeak/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>squirrelmail</td>
+<td><a href="http://squirrelmail.org/wiki/wiki.php?&lt;phrase">http://squirrelmail.org/wiki/wiki.php?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>tavi</td>
+<td><a href="http://tavi.sourceforge.net/&lt;phrase">http://tavi.sourceforge.net/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>thesaurus</td>
+<td><a href="http://www.thesaurus.com/cgi-bin/search?config=roget&amp;words=&lt;phrase">http://www.thesaurus.com/cgi-bin/search?config=roget&amp;words=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>thinki</td>
+<td><a href="http://www.thinkware.se/cgi-bin/thinki.cgi/&lt;phrase">http://www.thinkware.se/cgi-bin/thinki.cgi/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>twiki</td>
+<td><a href="http://twiki.sourceforge.net/cgi-bin/view/&lt;phrase">http://twiki.sourceforge.net/cgi-bin/view/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>usemod</td>
+<td><a href="http://www.usemod.com/cgi-bin/wiki.pl?&lt;phrase">http://www.usemod.com/cgi-bin/wiki.pl?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>visualworks</td>
+<td><a href="http://wiki.cs.uiuc.edu/VisualWorks/&lt;phrase">http://wiki.cs.uiuc.edu/VisualWorks/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>webster</td>
+<td><a href="http://m-w.com/cgi-bin/dictionary?va=&lt;phrase">http://m-w.com/cgi-bin/dictionary?va=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>why</td>
+<td><a href="http://clublet.com/c/c/why?&lt;phrase">http://clublet.com/c/c/why?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>wiki</td>
+<td><a href="http://c2.com/cgi/wiki?&lt;phrase">http://c2.com/cgi/wiki?&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>wikifind</td>
+<td><a href="http://c2.com/cgi/wiki?FindPage&amp;value=&lt;phrase">http://c2.com/cgi/wiki?FindPage&amp;value=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>wikipedia</td>
+<td><a href="http://en.wikipedia.org/wiki/&lt;phrase">http://en.wikipedia.org/wiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>wiktionary</td>
+<td><a href="http://en.wiktionary.org/wiki/&lt;phrase">http://en.wiktionary.org/wiki/&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>wunderground</td>
+<td><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=&lt;phrase">http://www.wunderground.com/cgi-bin/findweather/getForecast?query=&lt;phrase</a>&gt;</td>
+</tr>
+<tr>
+<td>zwiki</td>
+<td><a href="http://www.zwiki.org/&lt;phrase">http://www.zwiki.org/&lt;phrase</a>&gt;</td>
+</tr>
+</table>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Titlelink maintained by <a href="https://github.com/gesellix">gesellix</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30906805-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
