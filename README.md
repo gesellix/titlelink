@@ -58,11 +58,11 @@ To let TitleLink replace your phrase with the correct title of the article, use 
 {ln:rep:one two} would then create a link with "One Two Three" as displayed text.
 
 TitleLink can be used as a shortcut for creating external links, too.
-Rather than just putting a complete HTML anchor tag in your text you can easilly turn it into a link as follows: {ln:http://joomlacode.org/gf/project/titlelink/}
+Rather than just putting a complete HTML anchor tag in your text you can easilly turn it into a link as follows: {ln:https://github.com/gesellix/titlelink}
 
-You can even have links open a new window with the nw: modifier. {ln:nw:http://joomlacode.org/gf/project/titlelink/}
+You can even have links open a new window with the nw: modifier. {ln:nw:https://github.com/gesellix/titlelink}
 
-Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:http://joomlacode.org/gf/project/titlelink/ 'TitleLink at JoomlaCode}
+Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:https://github.com/gesellix/titlelink 'TitleLink at GitHub}
 
 You can create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
 Other sites which support keywords are called by using the command search-&lt;selector&gt; where &lt;selector&gt; is one of the sites listed at the end of this document.
