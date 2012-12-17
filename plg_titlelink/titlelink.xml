@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="1.6" type="plugin" group="system" method="upgrade">
+<extension version="3.0" type="plugin" group="system" method="upgrade">
    <name>System - TitleLink</name>
    <author>Tobias Gesellchen</author>
    <creationDate>2008-06-03</creationDate>
-   <copyright>(C) 2005-2011 Tobias Gesellchen. All rights reserved.</copyright>
+   <copyright>(C) 2005-2012 Tobias Gesellchen. All rights reserved.</copyright>
    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
    <authorEmail>tobias@gesellix.de</authorEmail>
    <authorUrl>www.gesellix.de</authorUrl>
-   <version>3.5.1 2012-04-16 stable</version>
+   <version>3.6.0 2012-12-18 stable</version>
    <description>DESCTITLELINK</description>
    <files>
       <filename plugin="titlelink">titlelink.php</filename>

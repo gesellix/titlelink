@@ -184,7 +184,7 @@ class plgSystemTitleLink extends JPlugin
   {
     global $titlelink_cache;
 
-    $database = & JFactory::getDBO();
+    $database = JFactory::getDBO();
     $matches = array();
 
     if (preg_match_all($this->finalpattern, $content, $matches, PREG_PATTERN_ORDER)) {
