@@ -136,7 +136,8 @@ class plgSystemTitleLink extends JPlugin
       $doc->addScript('plugins/system/titlelink/titlelink_plugins/linkr_script.js');
 
       // URL for AJAX requests. Be sure to use full URLs
-      $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JUtility::getToken() . '=1';
+      $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JSession::getFormToken() . '=1';
+//      $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JUtility::getToken() . '=1';
 
       return 'LinkrFoo.init(\'' . $r . '\');';
     }
@@ -151,8 +152,8 @@ class plgSystemTitleLink extends JPlugin
       return true;
     }
 
-    $option = JRequest::getVar('option');
-    $layout = JRequest::getVar('layout');
+    $option = JFactory::getApplication()->input->getString('option');
+    $layout = JFactory::getApplication()->input->getString('layout');
     if ($option == 'com_content' && $layout == 'edit') {
       return true;
     }
@@ -162,15 +163,17 @@ class plgSystemTitleLink extends JPlugin
     return true;
   }
 
-  /**
-   * Replaces TitleLinks with the correct html hyperlinks
-   *
-   * Method is called by the view
-   *
-   * @param   object    The article object.  Note $article->text is also available
-   * @param   object    The article params
-   * @param   int     The 'page' number
-   */
+    /**
+     * Replaces TitleLinks with the correct html hyperlinks
+     *
+     * Method is called by the view
+     *
+     * @param $context ? not used
+     * @param $article ? article object.  Note $article->text is also available
+     * @param $params ? article params
+     * @param int $page The 'page' number
+     * @return bool always true
+     */
   public function onContentPrepare_($context, &$article, &$params, $page = 0)
   {
     $article->text = $this->replaceTitleLinksWithURLs($article->text);
@@ -553,9 +556,16 @@ class plgSystemTitleLink extends JPlugin
     return $this->startswith($link, "http") && ((isset($domain[3])) and (isset($http[3])) and ($domain[3] !== $http[3]));
   }
 
+    /**
+     * @param $database JDatabaseDriver
+     * @param $plugins
+     * @param $phrase
+     * @param $partial_match
+     * @return mixed|null
+     */
   function getByPlugins($database, $plugins, $phrase, $partial_match)
   {
-    $phrase_escaped = $database->getEscaped($phrase, true);
+    $phrase_escaped = $database->escape($phrase, true);
 
     $count = count($plugins);
     for ($i = 0; $i < $count; $i++) {
@@ -615,6 +625,7 @@ class plgSystemTitleLink extends JPlugin
       }
     }
 
+    $plugin_fkt = null;
     // get only functions which are usable in this bot
     $functions = get_defined_functions();
     $functions = $functions["user"];
@@ -879,5 +890,3 @@ class plgSystemTitleLink extends JPlugin
     return $search_link;
   }
 }
-
-?>
