@@ -598,7 +598,7 @@ class plgSystemTitleLink extends JPlugin
         foreach ($files as $key => $row) {
             $file = $row['file'];
             if (!empty($file)) {
-                include_once(JPATH_ROOT . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file);
+                include_once($dir . DIRECTORY_SEPARATOR . $file);
             }
         }
 
