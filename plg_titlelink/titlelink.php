@@ -16,6 +16,7 @@ jimport('joomla.plugin.plugin');
 
 class plgSystemTitleLink extends JPlugin
 {
+
     /**
      * caches results of plugins
      * index-key: phrase
@@ -64,10 +65,8 @@ class plgSystemTitleLink extends JPlugin
     var $enablepartialmatch;
     var $disp_link;
     var $disp_tooltip;
-    var $linkr_enabled;
 
     var $finalpattern;
-
 
     /**
      * Constructor
@@ -87,14 +86,13 @@ class plgSystemTitleLink extends JPlugin
         $this->enablepartialmatch = $this->params->get('enablepartialmatch', 1);
         $this->disp_link = $this->params->get('disp_link', 1);
         $this->disp_tooltip = $this->params->get('disp_tooltip', 1);
-        $this->linkr_enabled = $this->params->get('linkr_enabled', 1);
+        $this->dir = $this->params->get('plugin_dir', JPATH_ROOT . DIRECTORY_SEPARATOR . 'plugins/system/titlelink/titlelink_plugins');
 
         $this->finalpattern = $this->pattern_start_end . preg_quote($this->trigger_prefix) . ".+?" . preg_quote($this->trigger_suffix) . $this->pattern_start_end;
 
         if ($this->plugin_cache == null || !is_array($this->plugin_cache)) {
             $this->plugin_cache = $this->getPluginFunctions($this->dir, $this->pluginmask, $this->params);
         }
-
         //$this->titlelink_cache = array();
 //        $options = array(
 //            'key' => 'value',
@@ -102,50 +100,6 @@ class plgSystemTitleLink extends JPlugin
 //        );
 //        $this->_cache = JCache::getInstance('page', $options);
 //        $this->_cache_key = JRequest::getURI();
-    }
-
-    // Send links to Linkr
-    function onLinkrGetLinks($version)
-    {
-        $result = array();
-
-        // This plugin doesn't actually do anything.
-        // It will only display the current version
-        // in a popup using the LinkrHelper.test()
-        // javascript function
-
-        if ($this->linkr_enabled && $version >= 2.2) {
-            $msg = 'TitleLink plugin is working on Linkr ' . $version;
-
-            // Since this will be added to the "onclick"
-            // attribute, use 'single quotes' instead
-            // of "double quotes"
-            //$js = 'LinkrHelper.test(\''. $msg .'\')';
-
-            // Return link title and javascript statement
-            $result = array(
-                'TitleLink' => 'LinkrHelper.layout(\'link\')'
-            );
-        }
-
-        return $result;
-    }
-
-    // Linkr Scripts
-    function onLinkrLoadJS($version)
-    {
-        if ($this->linkr_enabled && $version >= 2.2 && 2 == 1) {
-            $doc = & JFactory::getDocument();
-            $doc->addScript('plugins/system/titlelink/titlelink_plugins/linkr_script.js');
-
-            // URL for AJAX requests. Be sure to use full URLs
-            $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JSession::getFormToken() . '=1';
-//      $r = JURI::base() . 'index.php?option=com_foo&amp;tmpl=component&amp;view=foo&amp;' . JUtility::getToken() . '=1';
-
-            return 'LinkrFoo.init(\'' . $r . '\');';
-        }
-
-        return '';
     }
 
     public function onAfterRender()
@@ -191,7 +145,7 @@ class plgSystemTitleLink extends JPlugin
         global $titlelink_cache;
 
         $database = JFactory::getDBO();
-        $matches = array();
+        $matches = array ();
 
         if (preg_match_all($this->finalpattern, $content, $matches, PREG_PATTERN_ORDER)) {
             $titlelink_disabled = false;
@@ -261,7 +215,8 @@ class plgSystemTitleLink extends JPlugin
                                 if ($phrase == "false") {
                                     $titlelink_disabled = true;
                                     $titlelink_was_disabled = false;
-                                } else {
+                                }
+                                else {
                                     $titlelink_disabled = false;
                                     $titlelink_was_disabled = true;
                                 }
@@ -296,20 +251,38 @@ class plgSystemTitleLink extends JPlugin
                             default:
                                 if ($this->startswith($pieces[$i], $this->plugin_call . "-") && empty($plugin_call_name)) {
                                     $plugin_call_name = substr($pieces[$i], strlen($this->plugin_call . "-"));
-                                } else if ($this->startswith($pieces[$i], $this->css_class_pattern) && empty($css_class)) {
-                                    $css_class = " class=\"" . substr($pieces[$i], strlen($this->css_class_pattern)) . "\" ";
-                                } else if ($this->startswith($pieces[$i], $this->item_id) && empty($my_item_id)) {
-                                    $my_item_id = substr($pieces[$i], strlen($this->item_id));
-                                } else if ($this->startswith($pieces[$i], $this->limitstart) && empty($limitstart_ix)) {
-                                    $limitstart_ix = substr($pieces[$i], strlen($this->limitstart));
-                                } else if ($this->startswith($pieces[$i], $this->search_pattern)) {
-                                    $link = $this->getSearchLink(substr($pieces[$i], 0, strlen($this->search_pattern)), $phrase);
-                                    $name = $phrase;
-                                } else if ($this->startswith($phrase, "index.php")) {
-                                    $link = $phrase;
-                                    $name = $link;
-                                } else if (empty($to_append) && $this->startswith($pieces[$i], $this->append_url)) {
-                                    $to_append = substr($pieces[$i], strlen($this->append_url));
+                                }
+                                else {
+                                    if ($this->startswith($pieces[$i], $this->css_class_pattern) && empty($css_class)) {
+                                        $css_class = " class=\"" . substr($pieces[$i], strlen($this->css_class_pattern)) . "\" ";
+                                    }
+                                    else {
+                                        if ($this->startswith($pieces[$i], $this->item_id) && empty($my_item_id)) {
+                                            $my_item_id = substr($pieces[$i], strlen($this->item_id));
+                                        }
+                                        else {
+                                            if ($this->startswith($pieces[$i], $this->limitstart) && empty($limitstart_ix)) {
+                                                $limitstart_ix = substr($pieces[$i], strlen($this->limitstart));
+                                            }
+                                            else {
+                                                if ($this->startswith($pieces[$i], $this->search_pattern)) {
+                                                    $link = $this->getSearchLink(substr($pieces[$i], 0, strlen($this->search_pattern)), $phrase);
+                                                    $name = $phrase;
+                                                }
+                                                else {
+                                                    if ($this->startswith($phrase, "index.php")) {
+                                                        $link = $phrase;
+                                                        $name = $link;
+                                                    }
+                                                    else {
+                                                        if (empty($to_append) && $this->startswith($pieces[$i], $this->append_url)) {
+                                                            $to_append = substr($pieces[$i], strlen($this->append_url));
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                         }
                     }
@@ -318,11 +291,14 @@ class plgSystemTitleLink extends JPlugin
                         $content = preg_replace($this->finalpattern, $link, $content, 1);
                         //$article->text = $content;
                         continue;
-                    } else if ($titlelink_was_disabled) {
-                        $content = preg_replace($this->finalpattern, $link, $content, 1);
-                        //$article->text = $content;
-                        $titlelink_was_disabled = false;
-                        continue;
+                    }
+                    else {
+                        if ($titlelink_was_disabled) {
+                            $content = preg_replace($this->finalpattern, $link, $content, 1);
+                            //$article->text = $content;
+                            $titlelink_was_disabled = false;
+                            continue;
+                        }
                     }
 
                     // try to find a link by help of the plugins
@@ -332,7 +308,7 @@ class plgSystemTitleLink extends JPlugin
                     if (empty($link)) { // did the search functions already set a link?
                         // ask cache
                         if (!is_array($titlelink_cache)) {
-                            $titlelink_cache = array();
+                            $titlelink_cache = array ();
                         }
                         if (!array_key_exists($phrase, $titlelink_cache)) {
                             // try to find an exact match
@@ -341,7 +317,8 @@ class plgSystemTitleLink extends JPlugin
                                 // no exact match found --> try partial match
                                 $result = $this->getByPlugins($database, $this->plugin_cache, $phrase, true);
                             }
-                        } else {
+                        }
+                        else {
                             $result = $titlelink_cache[$phrase];
                         }
 
@@ -388,7 +365,8 @@ class plgSystemTitleLink extends JPlugin
                                 case 2: // Explicit Title
                                     if (!(empty($title1) || $this->startswith($title1, "<img "))) {
                                         $link_title = $title1;
-                                    } else {
+                                    }
+                                    else {
                                         $link_title = $name;
                                     }
                                     break;
@@ -413,7 +391,8 @@ class plgSystemTitleLink extends JPlugin
                         // set title
                         if ($debug_enabled && $external) {
                             $options .= "title=" . $link_title . "\" (open in new window)\"";
-                        } else {
+                        }
+                        else {
                             $options .= "title=\"" . $link_title . "\"";
                         }
 
@@ -439,7 +418,8 @@ class plgSystemTitleLink extends JPlugin
                             // external link
                             //$link = htmlentities($link);
                             $link = htmlspecialchars($link);
-                        } else {
+                        }
+                        else {
                             // internal link, make it sef
                             //$link = htmlentities($link);
                             $link = JRoute::_($link);
@@ -455,7 +435,8 @@ class plgSystemTitleLink extends JPlugin
                         if (!$create_open_tag) {
                             $link .= "$link_text</a>";
                         }
-                    } else {
+                    }
+                    else {
                         if ($this->enablenewcontent) {
                             $link = "<strong>";
                             $link .= "<a href=\"";
@@ -469,7 +450,8 @@ class plgSystemTitleLink extends JPlugin
                             $link .= $phrase;
                             $link .= "!</a>";
                             $link .= "</strong>";
-                        } else {
+                        }
+                        else {
                             // show $phrase in bold font if no link could be built
                             $link = "<strong>";
                             $link .= $phrase;
@@ -516,12 +498,12 @@ class plgSystemTitleLink extends JPlugin
         return $content;
     }
 
-
 /////////////////////////////////////////////
 // internal functions
 
     function callExternalPlugin($article, $params, $page = 0)
     {
+//        $plugin_to_call = JFactory::getApplication()->input->get($this->plugin_call);
         $plugin_to_call = JRequest::getVar($this->plugin_call);
         //$plugin_to_call = html_entity_decode(mosGetParam($_GET, $this->plugin_call), ENT_QUOTES);
         $plugin_to_call = stripslashes($plugin_to_call);
@@ -569,6 +551,12 @@ class plgSystemTitleLink extends JPlugin
         return null;
     }
 
+    /**
+     * @param $dir
+     * @param $pluginmask
+     * @param $pluginParams JRegistry
+     * @return array|null
+     */
     function getPluginFunctions($dir, $pluginmask, &$pluginParams)
     {
         //$dir = $this->dir; $pluginmask = $this->pluginmask; $pluginParams = $this->params;
@@ -578,7 +566,7 @@ class plgSystemTitleLink extends JPlugin
         //$pluginParams   = new JParameter( $plugin->params );
 
         $files = null;
-        $dh = opendir(JPATH_ROOT . DIRECTORY_SEPARATOR . $dir);
+        $dh = opendir($dir);
         while (false !== ($filename = readdir($dh))) {
             $keyname = substr($filename, 0, strlen($filename) - strlen('.php'));
 
@@ -586,7 +574,7 @@ class plgSystemTitleLink extends JPlugin
                 && $pluginParams->get($keyname, 0) > 0
             ) {
                 // found "plugin", include in list
-                $files[] = array('file' => $filename, 'order' => $pluginParams->get($keyname, 0));
+                $files[] = array ('file' => $filename, 'order' => $pluginParams->get($keyname, 0));
             }
         }
 
@@ -595,8 +583,8 @@ class plgSystemTitleLink extends JPlugin
             return null;
         }
 
-        $filenames = array();
-        $orders = array();
+        $filenames = array ();
+        $orders = array ();
 
         // Obtain a list of columns
         foreach ($files as $key => $row) {
@@ -643,8 +631,8 @@ class plgSystemTitleLink extends JPlugin
     function stringrpos($haystack, $needle, $offset = NULL)
     {
         return strlen($haystack)
-            - strpos(strrev($haystack), strrev($needle), $offset)
-            - strlen($needle);
+        - strpos(strrev($haystack), strrev($needle), $offset)
+        - strlen($needle);
     }
 
     function strrpos_string($haystack, $needle, $offset = 0)
@@ -658,10 +646,12 @@ class plgSystemTitleLink extends JPlugin
             }
             if ($found) {
                 return $last_pos - 1;
-            } else {
+            }
+            else {
                 return false;
             }
-        } else {
+        }
+        else {
             return false;
         }
     }

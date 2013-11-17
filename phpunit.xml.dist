@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/_bootstrap.php" colors="true">
+  <php>
+    <const name="JOOMLA_BASE_DIR" value="./your/path/to/joomla-cms"/>
+    <const name="TITLELINK_BASE_DIR" value="."/>
+  </php>
+
+  <logging>
+    <log type="coverage-text" target="tests/log/coverage.txt" lowUpperBound="35" highLowerBound="70"/>
+  </logging>
+</phpunit>
