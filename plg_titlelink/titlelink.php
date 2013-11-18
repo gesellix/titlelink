@@ -46,7 +46,7 @@ class plgSystemTitleLink extends JPlugin
     var $enabled = "enable";
     var $debug_mode = "debug";
 
-    var $dir = 'plugins/system/titlelink/titlelink_plugins';
+    var $dir;
     var $pluginmask = 'plugin_';
 
     /**
@@ -74,7 +74,7 @@ class plgSystemTitleLink extends JPlugin
      * @param object $subject The object to observe
      * @param array $config  The object that holds the plugin parameters
      */
-    function __construct(& $subject, $config)
+    function __construct(& $subject, $config = array ())
     {
         parent::__construct($subject, $config);
 
@@ -115,8 +115,8 @@ class plgSystemTitleLink extends JPlugin
             return true;
         }
 
-        $output = $this->replaceTitleLinksWithURLs(JResponse::getBody());
-        JResponse::setBody($output);
+        $output = $this->replaceTitleLinksWithURLs($app->getBody(false));
+        $app->setBody($output);
         return true;
     }
 

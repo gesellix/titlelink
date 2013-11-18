@@ -19,10 +19,11 @@ class plgSystemTitleLinkTest extends TestCase
     {
         $this->saveFactoryState();
 
-        JFactory::$application = $this->getMockApplication();
+        JFactory::$application = $this->getMockCmsApp();
         JFactory::$database = $this->getMockDatabase();
 
         $dispatcher = JEventDispatcher::getInstance();
+        JFactory::$application->loadDispatcher($dispatcher);
 
         $this->_params = new JRegistry;
         $config = array ();
@@ -39,22 +40,47 @@ class plgSystemTitleLinkTest extends TestCase
         $this->restoreFactoryState();
     }
 
-    public function test_defaultTriggerPrefix_with_TestReflection()
-    {
-        $this->assertThat(
-            TestReflection::getValue($this->_titlelink, 'trigger_prefix'),
-            $this->equalTo("{ln"));
-    }
-
     public function test_defaultTriggerPrefix()
     {
-        $trigger_prefix = $this->_titlelink->trigger_prefix;
-        $this->assertThat($trigger_prefix, $this->equalTo("{ln"));
+        $this->assertThat(
+            $this->_titlelink->trigger_prefix,
+            $this->equalTo("{ln"));
     }
 
     public function test_defaultTriggerSuffix()
     {
-        $trigger_suffix = $this->_titlelink->trigger_suffix;
-        $this->assertThat($trigger_suffix, $this->equalTo("}"));
+        $this->assertThat(
+            $this->_titlelink->trigger_suffix,
+            $this->equalTo("}"));
+    }
+
+    public function test_onAfterRender_exists()
+    {
+        $this->assertThat(
+            is_callable(array ($this->_titlelink, 'onAfterRender')),
+            $this->isTrue());
+    }
+
+    public function test_replaceTitleLinksWithURLs_exists()
+    {
+        $this->assertThat(
+//            is_callable(array ($this->_titlelink, 'replaceTitleLinksWithURLs')),
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', "content"),
+            $this->equalTo("content"));
+    }
+
+    public function test_onAfterRender_in_admin_backend_returns_unchanged_body()
+    {
+        JFactory::$application->setBody("{ln:body}");
+        $this->assertThat(
+            JFactory::$application->getBody(),
+            $this->equalTo("{ln:body}"));
+
+        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => true));
+        $this->_titlelink->onAfterRender();
+
+        $this->assertThat(
+            JFactory::$application->getBody(),
+            $this->equalTo("{ln:body}"));
     }
 }
