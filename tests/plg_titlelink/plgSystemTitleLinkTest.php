@@ -54,6 +54,48 @@ class plgSystemTitleLinkTest extends TestCase
             $this->equalTo("}"));
     }
 
+    public function test_defaultSeparator()
+    {
+        $this->assertThat(
+            $this->_titlelink->separator,
+            $this->equalTo(":"));
+    }
+
+    public function test_defaultEnablenewcontent()
+    {
+        $this->assertThat(
+            $this->_titlelink->enablenewcontent,
+            $this->equalTo(0));
+    }
+
+    public function test_defaultEnablepartialmatch()
+    {
+        $this->assertThat(
+            $this->_titlelink->enablepartialmatch,
+            $this->equalTo(1));
+    }
+
+    public function test_defaultDispLink()
+    {
+        $this->assertThat(
+            $this->_titlelink->disp_link,
+            $this->equalTo(1));
+    }
+
+    public function test_defaultDispTooltip()
+    {
+        $this->assertThat(
+            $this->_titlelink->disp_tooltip,
+            $this->equalTo(1));
+    }
+
+    public function test_defaultPluginDir()
+    {
+        $this->assertThat(
+            $this->_titlelink->dir,
+            $this->equalTo(TITLELINK_BASE_DIR . '/plg_titlelink/titlelink_plugins'));
+    }
+
     public function test_onAfterRender_exists()
     {
         $this->assertThat(
