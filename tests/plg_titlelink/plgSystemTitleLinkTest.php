@@ -72,11 +72,22 @@ class plgSystemTitleLinkTest extends TestCase
     public function test_onAfterRender_in_admin_backend_returns_unchanged_body()
     {
         JFactory::$application->setBody("{ln:body}");
+        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => true));
+
+        $this->_titlelink->onAfterRender();
+
         $this->assertThat(
             JFactory::$application->getBody(),
             $this->equalTo("{ln:body}"));
+    }
 
-        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => true));
+    public function test_onAfterRender_in_content_edit_mode_returns_unchanged_body()
+    {
+        JFactory::$application->setBody("{ln:body}");
+        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => false));
+        JFactory::$application->input->set('option', 'com_content');
+        JFactory::$application->input->set('layout', 'edit');
+
         $this->_titlelink->onAfterRender();
 
         $this->assertThat(
