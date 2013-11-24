@@ -92,7 +92,7 @@ class plgSystemTitleLinkTest extends TestCase
     public function test_defaultPluginDir()
     {
         $this->assertThat(
-            $this->_titlelink->dir,
+            $this->_titlelink->plugin_dir,
             $this->equalTo(TITLELINK_BASE_DIR . '/plg_titlelink/titlelink_plugins'));
     }
 

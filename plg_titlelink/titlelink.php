@@ -46,7 +46,7 @@ class plgSystemTitleLink extends JPlugin
     var $enabled = "enable";
     var $debug_mode = "debug";
 
-    var $dir;
+    var $plugin_dir;
     var $pluginmask = 'plugin_';
 
     /**
@@ -86,12 +86,12 @@ class plgSystemTitleLink extends JPlugin
         $this->enablepartialmatch = $this->params->get('enablepartialmatch', 1);
         $this->disp_link = $this->params->get('disp_link', 1);
         $this->disp_tooltip = $this->params->get('disp_tooltip', 1);
-        $this->dir = $this->params->get('plugin_dir', JPATH_ROOT . DIRECTORY_SEPARATOR . 'plugins/system/titlelink/titlelink_plugins');
+        $this->plugin_dir = $this->params->get('plugin_dir', JPATH_ROOT . DIRECTORY_SEPARATOR . 'plugins/system/titlelink/titlelink_plugins');
 
         $this->finalpattern = $this->pattern_start_end . preg_quote($this->trigger_prefix) . ".+?" . preg_quote($this->trigger_suffix) . $this->pattern_start_end;
 
         if ($this->plugin_cache == null || !is_array($this->plugin_cache)) {
-            $this->plugin_cache = $this->getPluginFunctions($this->dir, $this->pluginmask, $this->params);
+            $this->plugin_cache = $this->getPluginFunctions($this->plugin_dir, $this->pluginmask, $this->params);
         }
         //$this->titlelink_cache = array();
 //        $options = array(
@@ -115,28 +115,10 @@ class plgSystemTitleLink extends JPlugin
             return true;
         }
 
+//        $article->text = $this->replaceTitleLinksWithURLs($article->text);
+//        $this->callExternalPlugin($article, $params, $page);
         $output = $this->replaceTitleLinksWithURLs($app->getBody(false));
         $app->setBody($output);
-        return true;
-    }
-
-    /**
-     * Replaces TitleLinks with the correct html hyperlinks
-     *
-     * Method is called by the view
-     *
-     * @param $context ? not used
-     * @param $article ? article object.  Note $article->text is also available
-     * @param $params ? article params
-     * @param int $page The 'page' number
-     * @return bool always true
-     */
-    public function onContentPrepare_($context, &$article, &$params, $page = 0)
-    {
-        $article->text = $this->replaceTitleLinksWithURLs($article->text);
-
-        $this->callExternalPlugin($article, $params, $page);
-
         return true;
     }
 
@@ -603,7 +585,7 @@ class plgSystemTitleLink extends JPlugin
         }
 
         $plugin_fkt = null;
-        // get only functions which are usable in this bot
+        // get only functions which are usable in this plugin
         $functions = get_defined_functions();
         $functions = $functions["user"];
         $count = count($functions);
@@ -626,34 +608,6 @@ class plgSystemTitleLink extends JPlugin
     {
         $pos = strpos($source, $mask);
         return (($pos !== false) && ($pos == (strlen($source) - strlen($mask))));
-    }
-
-    function stringrpos($haystack, $needle, $offset = NULL)
-    {
-        return strlen($haystack)
-        - strpos(strrev($haystack), strrev($needle), $offset)
-        - strlen($needle);
-    }
-
-    function strrpos_string($haystack, $needle, $offset = 0)
-    {
-        if (trim($haystack) != "" && trim($needle) != "" && $offset <= strlen($haystack)) {
-            $last_pos = $offset;
-            $found = false;
-            while (($curr_pos = strpos($haystack, $needle, $last_pos)) !== false) {
-                $found = true;
-                $last_pos = $curr_pos + 1;
-            }
-            if ($found) {
-                return $last_pos - 1;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
     }
 
     function getSearchLink($engine, $phrase)
