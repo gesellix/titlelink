@@ -172,8 +172,8 @@ class plgSystemTitleLinkTest extends TestCase
 
     public function test_replaceTitleLinksWithURLs_with_external_http_link()
     {
-        $content = "{ln:http://www.example.com/}";
-        $expectedResult = '<a href="http://www.example.com/" title="http://www.example.com/">http://www.example.com/</a>';
+        $content = "look at {ln:http://www.example.com/}, ma!";
+        $expectedResult = 'look at <a href="http://www.example.com/" title="http://www.example.com/">http://www.example.com/</a>, ma!';
         $this->assertThat(
             TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
             $this->equalTo($expectedResult));
@@ -237,6 +237,15 @@ class plgSystemTitleLinkTest extends TestCase
     {
         $content = "{ln:nw:css-CLASS:http://www.example.com/ 'linktext}";
         $expectedResult = '<a href="http://www.example.com/"  class="CLASS" title="http://www.example.com/" target="_blank">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_partially_disabled_plugin()
+    {
+        $content = "{ln:enable:false} ... {ln:http://www.non-replaced-example.com/} .. {ln:enable:true} .. {ln:http://www.example.com}";
+        $expectedResult = ' ... http://www.non-replaced-example.com/ ..  .. <a href="http://www.example.com" title="http://www.example.com">http://www.example.com</a>';
         $this->assertThat(
             TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
             $this->equalTo($expectedResult));
