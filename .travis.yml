@@ -5,7 +5,9 @@ php:
   - 5.4
 
 before_script:
-  - git clone https://github.com/joomla/joomla-cms.git joomla-cms
+#  - git clone https://github.com/joomla/joomla-cms.git joomla-cms
+  - git clone https://github.com/gesellix-joomla/joomla-cms.git joomla-cms-gesellix
+  - git checkout application-mocks
   - pyrus channel-discover pear.phpunit.de
   - phpenv rehash
 
