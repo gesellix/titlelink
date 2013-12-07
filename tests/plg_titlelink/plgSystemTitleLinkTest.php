@@ -96,6 +96,42 @@ class plgSystemTitleLinkTest extends TestCase
             $this->equalTo(TITLELINK_BASE_DIR . '/plg_titlelink/titlelink_plugins'));
     }
 
+    public function test_loadPlugin_contenttitle_only()
+    {
+        $this->_params->set('plugin_content_title', 1);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_contenttitle'));
+    }
+
+    public function test_loadPlugin_contenttitle_and_menuitem_in_default_order()
+    {
+        $this->_params->set('plugin_content_title', 1);
+        $this->_params->set('plugin_menuitem', 2);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_contenttitle'));
+        $this->assertThat(
+            $pluginFunctions[1],
+            $this->equalTo('plugin_menuitem'));
+    }
+
+    public function test_loadPlugin_contenttitle_and_menuitem_in_reverse_order()
+    {
+        $this->_params->set('plugin_content_title', 2);
+        $this->_params->set('plugin_menuitem', 1);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+//        print_r($pluginFunctions);
+        $this->assertThat(
+            $pluginFunctions[1],
+            $this->equalTo('plugin_contenttitle'));
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_menuitem'));
+    }
+
     public function test_onAfterRender_exists()
     {
         $this->assertThat(
