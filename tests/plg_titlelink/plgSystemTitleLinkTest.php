@@ -103,29 +103,23 @@ class plgSystemTitleLinkTest extends TestCase
             $this->isTrue());
     }
 
-    public function test_replaceTitleLinksWithURLs_exists()
-    {
-        $this->assertThat(
-//            is_callable(array ($this->_titlelink, 'replaceTitleLinksWithURLs')),
-            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', "content"),
-            $this->equalTo("content"));
-    }
-
     public function test_onAfterRender_in_admin_backend_returns_unchanged_body()
     {
-        JFactory::$application->setBody("{ln:body}");
+        $content = "{ln:body}";
+        JFactory::$application->setBody($content);
         $this->assignMockReturns(JFactory::$application, array ('isAdmin' => true));
 
         $this->_titlelink->onAfterRender();
 
         $this->assertThat(
             JFactory::$application->getBody(),
-            $this->equalTo("{ln:body}"));
+            $this->equalTo($content));
     }
 
     public function test_onAfterRender_in_content_edit_mode_returns_unchanged_body()
     {
-        JFactory::$application->setBody("{ln:body}");
+        $content = "{ln:body}";
+        JFactory::$application->setBody($content);
         $this->assignMockReturns(JFactory::$application, array ('isAdmin' => false));
         JFactory::$application->input->set('option', 'com_content');
         JFactory::$application->input->set('layout', 'edit');
@@ -134,17 +128,117 @@ class plgSystemTitleLinkTest extends TestCase
 
         $this->assertThat(
             JFactory::$application->getBody(),
-            $this->equalTo("{ln:body}"));
+            $this->equalTo($content));
     }
 
-    public function test_onAfterRender_without_titlelink_pattern_returns_unchanged_body()
+    public function test_replaceTitleLinksWithURLs_exists()
     {
-        JFactory::$application->setBody("some simple text with only {lnpart of a complete titlelink pattern");
+        $content = "a body text";
+        $this->assertThat(
+//            is_callable(array ($this->_titlelink, 'replaceTitleLinksWithURLs')),
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($content));
+    }
 
+    public function test_replaceTitleLinksWithURLs_is_called_with_body()
+    {
+        // TODO extract replaceTitleLinksWithURLs to own component and make it replaceable by a mock/spy
+        $content = "content";
+        JFactory::$application->setBody($content);
         $this->_titlelink->onAfterRender();
-
         $this->assertThat(
             JFactory::$application->getBody(),
-            $this->equalTo("some simple text with only {lnpart of a complete titlelink pattern"));
+            $this->equalTo($content));
+    }
+
+    public function test_replaceTitleLinksWithURLs_result_is_returned_as_body()
+    {
+        // TODO extract replaceTitleLinksWithURLs to own component and make it replaceable by a mock/spy
+        $content = "content";
+        JFactory::$application->setBody($content);
+        $this->_titlelink->onAfterRender();
+        $this->assertThat(
+            JFactory::$application->getBody(),
+            $this->equalTo($content));
+    }
+
+    public function test_replaceTitleLinksWithURLs_without_titlelink_pattern_returns_unchanged_body()
+    {
+        $content = "{lntext with an incomplete pattern";
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($content));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_http_link()
+    {
+        $content = "{ln:http://www.example.com/}";
+        $expectedResult = '<a href="http://www.example.com/" title="http://www.example.com/">http://www.example.com/</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_https_link()
+    {
+        $content = "{ln:https://www.example.com/}";
+        $expectedResult = '<a href="https://www.example.com/" title="https://www.example.com/">https://www.example.com/</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_in_new_browser_window()
+    {
+        $content = "{ln:nw:http://www.example.com/}";
+        $expectedResult = '<a href="http://www.example.com/" title="http://www.example.com/" target="_blank">http://www.example.com/</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_individual_anchor_text()
+    {
+        $content = "{ln:http://www.example.com/ 'link text}";
+        $expectedResult = '<a href="http://www.example.com/" title="http://www.example.com/">link text</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_individual_anchor_and_title_texts()
+    {
+        $content = "{ln:http://www.example.com/ 'link text ''title text}";
+        $expectedResult = '<a href="http://www.example.com/" title="title text">link text</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_suffix()
+    {
+        $content = "{ln:append-SUFFIX:http://www.example.com/ 'linktext}";
+        $expectedResult = '<a href="http://www.example.com/SUFFIX" title="http://www.example.com/">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_link_anchor()
+    {
+        $content = "{ln:http://www.example.com/#ANCHOR 'linktext}";
+        $expectedResult = '<a href="http://www.example.com/#ANCHOR" title="http://www.example.com/">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_external_link_and_class()
+    {
+        $content = "{ln:nw:css-CLASS:http://www.example.com/ 'linktext}";
+        $expectedResult = '<a href="http://www.example.com/"  class="CLASS" title="http://www.example.com/" target="_blank">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
     }
 }
