@@ -136,4 +136,15 @@ class plgSystemTitleLinkTest extends TestCase
             JFactory::$application->getBody(),
             $this->equalTo("{ln:body}"));
     }
+
+    public function test_onAfterRender_without_titlelink_pattern_returns_unchanged_body()
+    {
+        JFactory::$application->setBody("some simple text with only {lnpart of a complete titlelink pattern");
+
+        $this->_titlelink->onAfterRender();
+
+        $this->assertThat(
+            JFactory::$application->getBody(),
+            $this->equalTo("some simple text with only {lnpart of a complete titlelink pattern"));
+    }
 }
