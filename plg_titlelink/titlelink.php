@@ -72,7 +72,7 @@ class plgSystemTitleLink extends JPlugin
      * Constructor
      *
      * @param object $subject The object to observe
-     * @param array $config  The object that holds the plugin parameters
+     * @param array $config The object that holds the plugin parameters
      */
     function __construct(& $subject, $config = array ())
     {
@@ -170,7 +170,6 @@ class plgSystemTitleLink extends JPlugin
                         $phrase = substr($phrase, 0, $anchorpos);
                     }
 
-                    $original_phrase = $phrase;
                     $phrase = html_entity_decode($phrase);
 
                     $link = null;
@@ -271,13 +270,11 @@ class plgSystemTitleLink extends JPlugin
 
                     if ($titlelink_disabled) {
                         $content = preg_replace($this->finalpattern, $link, $content, 1);
-                        //$article->text = $content;
                         continue;
                     }
                     else {
                         if ($titlelink_was_disabled) {
                             $content = preg_replace($this->finalpattern, $link, $content, 1);
-                            //$article->text = $content;
                             $titlelink_was_disabled = false;
                             continue;
                         }
