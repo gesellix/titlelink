@@ -2,6 +2,8 @@
 
 Written by [Tobias Gesellchen](http://www.gesellix.de/) with help on the documentation by [Marc Perkel](http://www.perkel.com/).
 
+[![Build Status](https://travis-ci.org/gesellix-joomla/titlelink.png)](https://travis-ci.org/gesellix-joomla/titlelink)
+
 ### Web links
 
 [Joomla Extensions Directory](http://extensions.joomla.org/component/option,com\_mtree/task,viewlink/link\_id,427/Itemid,35/),
