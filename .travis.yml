@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - git clone https://github.com/joomla/joomla-cms.git joomla-cms
+  - pyrus channel-discover pear.phpunit.de
+  - phpenv rehash
+
+script:
+  - phpunit --configuration travisci-phpunit.xml
