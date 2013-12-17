@@ -136,9 +136,8 @@ class plgSystemTitleLinkTest extends TestCase
         $this->_params->set('plugin_content_title', 1);
         $this->_params->set('plugin_menuitem', 1);
         $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
-        $this->assertThat(
-            $pluginFunctions[0],
-            $this->equalTo('plugin_menuitem'));
+        // TODO don't allow any of both plugins
+        $this->assertCount(1, $pluginFunctions);
     }
 
     public function test_loadPlugin_all_enabled()
