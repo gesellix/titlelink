@@ -123,13 +123,71 @@ class plgSystemTitleLinkTest extends TestCase
         $this->_params->set('plugin_content_title', 2);
         $this->_params->set('plugin_menuitem', 1);
         $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
-//        print_r($pluginFunctions);
         $this->assertThat(
             $pluginFunctions[1],
             $this->equalTo('plugin_contenttitle'));
         $this->assertThat(
             $pluginFunctions[0],
             $this->equalTo('plugin_menuitem'));
+    }
+
+    public function test_loadPlugin_contenttitle_and_menuitem_with_inconsistent_order()
+    {
+        $this->_params->set('plugin_content_title', 1);
+        $this->_params->set('plugin_menuitem', 1);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_menuitem'));
+    }
+
+    public function test_loadPlugin_all_enabled()
+    {
+        $this->_params->set('plugin_content_title', 1);
+        $this->_params->set('plugin_menuitem', 2);
+        $this->_params->set('plugin_alberghi', 3);
+        $this->_params->set('plugin_artforms', 4);
+        $this->_params->set('plugin_docman', 5);
+        $this->_params->set('plugin_jmovies', 6);
+        $this->_params->set('plugin_peoplebook', 7);
+        $this->_params->set('plugin_remository', 8);
+        $this->_params->set('plugin_shortlink', 9);
+        $this->_params->set('plugin_virtuemart', 10);
+        $this->_params->set('plugin_virtuemart_category', 11);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_contenttitle'));
+        $this->assertThat(
+            $pluginFunctions[1],
+            $this->equalTo('plugin_menuitem'));
+        $this->assertThat(
+            $pluginFunctions[2],
+            $this->equalTo('plugin_alberghi'));
+        $this->assertThat(
+            $pluginFunctions[3],
+            $this->equalTo('plugin_artforms'));
+        $this->assertThat(
+            $pluginFunctions[4],
+            $this->equalTo('plugin_docman'));
+        $this->assertThat(
+            $pluginFunctions[5],
+            $this->equalTo('plugin_jmovies'));
+        $this->assertThat(
+            $pluginFunctions[6],
+            $this->equalTo('plugin_peoplebook'));
+        $this->assertThat(
+            $pluginFunctions[7],
+            $this->equalTo('plugin_downloadremos'));
+        $this->assertThat(
+            $pluginFunctions[8],
+            $this->equalTo('plugin_shortlink'));
+        $this->assertThat(
+            $pluginFunctions[9],
+            $this->equalTo('plugin_virtuemart'));
+        $this->assertThat(
+            $pluginFunctions[10],
+            $this->equalTo('plugin_virtuemart_category'));
     }
 
     public function test_onAfterRender_exists()

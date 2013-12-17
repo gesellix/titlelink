@@ -553,7 +553,8 @@ class plgSystemTitleLink extends JPlugin
                 && $pluginParams->get($keyname, 0) > 0
             ) {
                 // found "plugin", include in list
-                $files[] = array ('file' => $filename, 'order' => $pluginParams->get($keyname, 0));
+                $absolute_path = realpath($dir . DIRECTORY_SEPARATOR . $filename);
+                $files[] = array ('file' => $absolute_path, 'order' => $pluginParams->get($keyname, 0));
             }
         }
 
@@ -565,31 +566,41 @@ class plgSystemTitleLink extends JPlugin
         $filenames = array ();
         $orders = array ();
 
-        // Obtain a list of columns
-        foreach ($files as $key => $row) {
-            $filenames[$key] = $row['file'];
-            $orders[$key] = $row['order'];
-        }
-
-        array_multisort($orders, SORT_ASC, $filenames, SORT_ASC, $files);
-
-        // load plugins
-        foreach ($files as $key => $row) {
+        // load plugins and save plugin order
+        foreach ($files as $index => $row) {
             $file = $row['file'];
+            $order = $row['order'];
             if (!empty($file)) {
-                include_once($dir . DIRECTORY_SEPARATOR . $file);
+                include_once($file);
+
+                $filenames[$index] = $file;
+                $orders[$index] = $order;
             }
         }
 
-        $plugin_fkt = null;
+        $filenames_by_order = array_combine($orders, $filenames);
+        ksort($filenames_by_order);
+
+        $function_names_by_filename = array ();
+
         // get only functions which are usable in this plugin
         $functions = get_defined_functions();
         $functions = $functions["user"];
         $count = count($functions);
         for ($i = 0; $i < $count; $i++) {
             if ($this->startswith($functions[$i], $pluginmask)) {
-                $plugin_fkt[] = $functions[$i];
+                $function_name = $functions[$i];
+
+                $reflFunc = new ReflectionFunction($function_name);
+                $declaring_file_name = $reflFunc->getFileName();
+
+                $function_names_by_filename[$declaring_file_name] = $function_name;
             }
+        }
+
+        $plugin_fkt = null;
+        foreach ($filenames_by_order as $order => $filename) {
+            $plugin_fkt[] = $function_names_by_filename[$filename];
         }
 
         return $plugin_fkt;
