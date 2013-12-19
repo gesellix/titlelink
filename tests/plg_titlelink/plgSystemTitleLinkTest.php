@@ -290,6 +290,15 @@ class plgSystemTitleLinkTest extends TestCase
             $this->equalTo($expectedResult));
     }
 
+    public function test_replaceTitleLinksWithURLs_with_open_anchor_tag()
+    {
+        $content = "{ln:op:http://www.example.com/}";
+        $expectedResult = '<a href="http://www.example.com/" title="http://www.example.com/">';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
     public function test_replaceTitleLinksWithURLs_with_external_link_and_individual_anchor_text()
     {
         $content = "{ln:http://www.example.com/ 'link text}";
@@ -339,6 +348,66 @@ class plgSystemTitleLinkTest extends TestCase
     {
         $content = "{ln:enable:false} ... {ln:http://www.non-replaced-example.com/} .. {ln:enable:true} .. {ln:http://www.example.com}";
         $expectedResult = ' ... http://www.non-replaced-example.com/ ..  .. <a href="http://www.example.com" title="http://www.example.com">http://www.example.com</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    // TODO make JApplicationCmsMock return the configured JRouter instance
+//    public function test_replaceTitleLinksWithURLs_with_page_search_keyword()
+//    {
+//        $router = JRouter::getInstance('site');
+//        $this->assignMockReturns(JFactory::$application, array ('getRouter' => $router));
+//        $this->assertNotNull(JFactory::getApplication()->getRouter());
+//
+//        $content = "{ln:search:my keyword 'linktext}";
+//        $expectedResult = '<a href="index.php?option=com_search&ordering=&searchphrase=all&searchword=my+keyword" title="my keyword">linktext</a>';
+//        $this->assertThat(
+//            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+//            $this->equalTo($expectedResult));
+//    }
+
+    public function test_replaceTitleLinksWithURLs_with_google_search_keyword()
+    {
+        $content = "{ln:google:my keyword 'linktext}";
+        $expectedResult = '<a href="http://www.google.com/search?q=my+keyword" title="my keyword">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_yahoo_search_keyword()
+    {
+        $content = "{ln:yahoo:my keyword 'linktext}";
+        $expectedResult = '<a href="http://search.yahoo.com/search?p=my+keyword" title="my keyword">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_wikipedia_search_keyword()
+    {
+        $content = "{ln:wikipedia:my keyword 'linktext}";
+        $expectedResult = '<a href="http://en.wikipedia.org/wiki/my%20keyword" title="my keyword">linktext</a>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_UNKNOWN_search_engine()
+    {
+        $content = "{ln:search-UNKNOWN:my keyword 'linktext}";
+        $expectedResult = '<strong>my keyword</strong>';
+        $this->assertThat(
+            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+            $this->equalTo($expectedResult));
+    }
+
+    public function test_replaceTitleLinksWithURLs_with_UNKNOWN_and_new_content_creation_enabled()
+    {
+        TestReflection::setValue($this->_titlelink, 'enablenewcontent', 1);
+        $content = "{ln:search-UNKNOWN::my keyword 'linktext}";
+        $expectedResult = '<strong><a href="index.php?option=com_content&view=article&layout=form" title="Submit article">my keyword!</a></strong>';
         $this->assertThat(
             TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
             $this->equalTo($expectedResult));
