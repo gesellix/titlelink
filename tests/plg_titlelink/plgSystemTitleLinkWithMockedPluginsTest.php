@@ -39,4 +39,13 @@ class plgSystemTitleLinkWithMockedPluginsTest extends TestCase
     {
         $this->restoreFactoryState();
     }
+
+    public function test_loadPlugin_without_result_only()
+    {
+        $this->_params->set('plugin_without_result', 1);
+        $pluginFunctions = $this->_titlelink->getPluginFunctions($this->_titlelink->plugin_dir, $this->_titlelink->pluginmask, $this->_params);
+        $this->assertThat(
+            $pluginFunctions[0],
+            $this->equalTo('plugin_withoutresult'));
+    }
 }
