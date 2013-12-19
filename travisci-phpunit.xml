@@ -10,7 +10,7 @@
   </logging>
   <filter>
     <blacklist>
-      <directory suffix=".php">../joomla-cms</directory>
+      <directory suffix=".php">./joomla-cms-gesellix</directory>
     </blacklist>
   </filter>
 </phpunit>
