@@ -353,19 +353,35 @@ class plgSystemTitleLinkTest extends TestCase
             $this->equalTo($expectedResult));
     }
 
-    // TODO make JApplicationCmsMock return the configured JRouter instance
-//    public function test_replaceTitleLinksWithURLs_with_page_search_keyword()
-//    {
-//        $router = JRouter::getInstance('site');
-//        $this->assignMockReturns(JFactory::$application, array ('getRouter' => $router));
-//        $this->assertNotNull(JFactory::getApplication()->getRouter());
-//
-//        $content = "{ln:search:my keyword 'linktext}";
-//        $expectedResult = '<a href="index.php?option=com_search&ordering=&searchphrase=all&searchword=my+keyword" title="my keyword">linktext</a>';
-//        $this->assertThat(
-//            TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
-//            $this->equalTo($expectedResult));
-//    }
+    /*    public function test_replaceTitleLinksWithURLs_with_page_search_keyword()
+        {
+            $router = JRouter::getInstance('site');
+
+    //        $jApplicationCms = $this->getMockClass(
+    //            'JApplicationCms',
+    //            array('getRouter')
+    //        );
+    //        $jApplicationCms::staticExpects($this->any())
+    //            ->method('getRouter')
+    //            ->will($this->returnValue($router));
+    //
+    //        $cmsRouter = $jApplicationCms::getRouter();
+
+    //        $this->assignMockReturns(JFactory::$application, array ('getName' => 'site'));
+            $this->assignMockReturns(JFactory::$application, array ('getRouter' => $router));
+            $cmsRouter = JFactory::$application->getRouter();
+
+            $this->assertEquals(
+                $cmsRouter,
+                $router
+            );
+
+            $content = "{ln:search:my keyword 'linktext}";
+            $expectedResult = '<a href="index.php?option=com_search&ordering=&searchphrase=all&searchword=my+keyword" title="my keyword">linktext</a>';
+            $this->assertThat(
+                TestReflection::invoke($this->_titlelink, 'replaceTitleLinksWithURLs', $content),
+                $this->equalTo($expectedResult));
+        }*/
 
     public function test_replaceTitleLinksWithURLs_with_google_search_keyword()
     {
