@@ -21,8 +21,8 @@ function plugin_weblinks($database, $phrase, $partial_match = true)
 
     $database->setQuery("SELECT * FROM #__weblinks WHERE state = 1 AND (alias ". $where_clause ." OR title ". $where_clause .")");
     $my = null;
-	$my = $database->loadObject();
-	if ($my)  // found something?
+    $my = $database->loadObject();
+    if ($my)  // found something?
     {
       $result[] = $my->url;
       $result[] = $my->title;
