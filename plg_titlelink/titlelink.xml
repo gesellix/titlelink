@@ -7,7 +7,7 @@
   <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
   <authorEmail>tobias@gesellix.de</authorEmail>
   <authorUrl>www.gesellix.de</authorUrl>
-  <version>3.6.1 2013-11-18</version>
+  <version>3.7.0 2018-12-01</version>
   <description>DESCTITLELINK</description>
   <files>
     <filename plugin="titlelink">titlelink.php</filename>
@@ -22,6 +22,7 @@
     <filename>titlelink_plugins/plugin_docman.php</filename>
     <filename>titlelink_plugins/plugin_peoplebook.php</filename>
     <filename>titlelink_plugins/plugin_jmovies.php</filename>
+    <filename>titlelink_plugins/plugin_weblinks.php</filename>
   </files>
   <languages folder="administrator/language">
     <language tag="en-GB">en-GB/en-GB.plg_system_titlelink.ini</language>
@@ -278,6 +279,24 @@
             type="list"
             default="0"
             label="Content by JMovies (needs com_jmovies)"
+            description="TODO.">
+          <option value="0">Disabled</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </field>
+        <field
+            name="plugin_weblinks"
+            type="list"
+            default="0"
+            label="Content by Web Links (needs com_weblinks)"
             description="TODO.">
           <option value="0">Disabled</option>
           <option value="1">1</option>
