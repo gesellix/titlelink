@@ -1,8 +1,8 @@
 <?php
 
 /*
-contributed by Holger Mueller 2018-12-01
-*/
+ * contributed by Holger Mueller 2018-12-01
+ */
 
 defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
@@ -26,7 +26,6 @@ function plugin_weblinks($database, $phrase, $partial_match = true)
     {
       $result[] = $my->url;
       $result[] = $my->title;
-
     }
   }
 
