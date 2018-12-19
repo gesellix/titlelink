@@ -24,7 +24,7 @@ function plugin_weblinks($database, $phrase, $partial_match = true)
     $my = $database->loadObject();
     if ($my)  // found something?
     {
-      $result[] = $my->url;
+      $result[] = "index.php?option=com_weblinks&task=weblink.go&id=".$my->id;
       $result[] = $my->title;
     }
   }
