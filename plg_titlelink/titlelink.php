@@ -522,7 +522,7 @@ class plgSystemTitleLink extends JPlugin
             $result = call_user_func($plugins[$i], $database, $phrase_escaped, $partial_match);
 
             // magix number '2' is the amount of strings we need as result
-            if (count($result) == 2) {
+            if ($result != null && count($result) == 2) {
                 return $result;
             }
         }
