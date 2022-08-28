@@ -1,0 +1,20 @@
+version: "3"
+services:
+  joomla3:
+    image: joomla:3.10-php7.4
+    container_name: joomla3
+    environment:
+      JOOMLA_DB_HOST: joomla3db
+      JOOMLA_DB_PASSWORD: password
+    networks:
+      - joomla
+    ports:
+      - "8080:80"
+  joomla3db:
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - joomla
+networks:
+  joomla:
