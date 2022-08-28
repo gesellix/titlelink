@@ -4,6 +4,18 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2019-02-10:
+
+- Improve PHP 7.2 compatibility (https://github.com/gesellix-joomla/titlelink/pull/3)
+
+2019-01-20:
+
+- Add com_weblinks plugin (https://github.com/gesellix-joomla/titlelink/pull/2)
+
+2013-11-18:
+
+- TitleLink v3.6.1 released for Joomla! 3.2
+
 2012-04-12:
 
 - transition from http://joomlacode.org/gf/project/titlelink/ (SVN) to https://github.com/gesellix/titlelink (Git)
@@ -45,7 +57,7 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 - corrections for new plugins (using new Joomla! 1.5.x API)
 - implemented new sorting of plugins
-- other plugins are disabled by default (only content and menuitem plugins are enabled) 
+- other plugins are disabled by default (only content and menuitem plugins are enabled)
 
 
 2008-10-26:
