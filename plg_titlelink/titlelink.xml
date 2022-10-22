@@ -7,7 +7,7 @@
   <license>https://opensource.org/licenses/mit-license.php MIT</license>
   <authorEmail>tobias@gesellix.de</authorEmail>
   <authorUrl>www.gesellix.net</authorUrl>
-  <version>3.7.0 2018-12-01</version>
+  <version>3.7.0-beta 2022-10-22</version>
   <description>DESCTITLELINK</description>
   <files>
     <filename plugin="titlelink">titlelink.php</filename>
