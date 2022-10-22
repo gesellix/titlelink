@@ -15,10 +15,12 @@ Written by [Tobias Gesellchen](https://www.gesellix.net/) with help on the docum
 ### Description
 
 TitleLink is a Joomla System Plugin to easily create links in Joomla content to other Joomla content by Title or Alias.
-By inserting text into your content like {ln:Growing African Violets} you link directly to your content with that title.
+By inserting text into your content like `{ln:Growing African Violets}` you link directly to your content with that title.
 The purpose of this extension is to help create easy ways to drop links to content within the material that you are writing.
 
-TitleLink is a must-have to link between Joomla! articles without using cryptic hyperlinks. TitleLink also minimizes the risk of breaking article links when changes are made to the target article. In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.
+TitleLink is a must-have to link between Joomla! articles without using cryptic hyperlinks.
+TitleLink also minimizes the risk of breaking article links when changes are made to the target article.
+In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.
 
 ### Installation
 
@@ -30,17 +32,17 @@ Publishing the plugin is the way you turn it on.
 TitleLink is used by dropping shortcut references into your content that you are writing.
 Suppose that you have written and published an article called "Growing African Violets".
 You are now writing a new article about plants you can grow indoors, and you want to reference and link to your African Violet article.
-You might use it this way: "If you don't have a lot of natural light you might try {ln:Growing African Violets}."
-Basically, you use the target article title and wrap it between two curly braces and the prefix "ln:", which is short for "link:".
+You might use it this way: `If you don't have a lot of natural light you might try {ln:Growing African Violets}.`
+Basically, you use the target article title and wrap it between two curly braces and the prefix `ln:`, which is short for `link:`.
 
 When the web page is displayed it will link to your article on violets.
 Suppose however that the text you want to display isn't the same as the title you want to link to.
-You can do it this way: "In low light I had good luck raising {ln:growing african violets 'violets} indoors."
+You can do it this way: `In low light I had good luck raising {ln:growing african violets 'violets} indoors.`
 This will show the link as "violets" but point to the content with the title "growing african violets".
-Linking isn't case sensitive so you don't have to match case to make the link work.
+Linking isn't case-sensitive, so you don't have to match case to make the link work.
 
 Linking is not limited to the title. You can link to the title\_alias field as well.
-If you used the word "violets" by itself in the title\_alias then all you would have to do to link to it is {ln:violets}.
+If you used the word "violets" by itself in the title\_alias then all you would have to do to link to it is `{ln:violets}`.
 
 When using JoomFish you always have to keep in mind that the translated titles aren't found by TitleLink.
 That means you have to use the titles of the original articles even in the translated versions.
@@ -48,33 +50,33 @@ TitleLink only finds the original article, JoomFish changes it to the translated
 
 By default, TitleLink will retry a search in all installed and activated plugins as configured in the plugin configuration.
 This second try will search for partial matches, so one could have an article titled "One Two Three",
-and a TitleLink {ln:one two} would find that article. To disable the retry, just use "em:" (for "exact match") as in {ln:em:one two}.
+and a TitleLink `{ln:one two}` would find that article. To disable the retry, just use `em:` (for "exact match") as in `{ln:em:one two}`.
 Using the title\_alias can be more convenient, when you have similar articles with similar titles. In such cases
 it can be useful not only for TitleLink to manually set a unique title\_alias.
 
 When the second try was a hit, TitleLink will use your partial phrase (e.g. "one two") as the displayed text.
-To let TitleLink replace your phrase with the correct title of the article, use "rep:" (for "replace") as option.
-{ln:rep:one two} would then create a link with "One Two Three" as displayed text.
+To let TitleLink replace your phrase with the correct title of the article, use `rep:` (for "replace") as option.
+`{ln:rep:one two}` would then create a link with "One Two Three" as displayed text.
 
 TitleLink can be used as a shortcut for creating external links, too.
-Rather than just putting a complete HTML anchor tag in your text you can easilly turn it into a link as follows: {ln:https://github.com/gesellix/titlelink}
+Rather than just putting a complete HTML anchor tag in your text you can easily turn it into a link as follows: `{ln:https://github.com/gesellix/titlelink}`
 
-You can even have links open a new window with the nw: modifier. {ln:nw:https://github.com/gesellix/titlelink}
+You can even have links open a new window with the `nw:` modifier: `{ln:nw:https://github.com/gesellix/titlelink}`
 
-Suppose however you want the link text to display something else. Here how you would do that: {ln:nw:https://github.com/gesellix/titlelink 'TitleLink at GitHub}
+Suppose however you want the link text to display something else. Here how you would do that: `{ln:nw:https://github.com/gesellix/titlelink 'TitleLink at GitHub}`
 
-You can create links to google, yahoo, wikipedia or site-internal searches by using the key words google, yahoo, wikipedia or search.
-Other sites which support keywords are called by using the command search-&lt;selector&gt; where &lt;selector&gt; is one of the sites listed at the end of this document.
+You can create links to google, yahoo, wikipedia or site-internal searches by using the keywords `google`, `yahoo`, `wikipedia` or `search`.
+Other sites which support keywords are called by using the command `search-<selector>` where `<selector>` is one of the sites listed at the end of this document.
 
 See the syntax and examples section for details!
 
 ### Syntax
 
 TitleLink provides a syntax like follows. The examples use the default settings for prefix and suffix.
-Parameters in square brackets '\[' and '\]' are optional, angle brackets '<' and '>' are obligatory.
-The vertical bar '|' tells you to choose one of the options linked together. See the examples for a less technical description.
+Parameters in square brackets `[` and `]` are optional, angle brackets `<` and `>` are obligatory.
+The vertical bar `|` tells you to choose one of the options linked together. See the examples for a less technical description.
 
-{ln\[:\]\[debug:\]\[nw:\]\[op:\]\[css-&lt;class&gt;:\]\[search-&lt;selector&gt;:\]\[append-&lt;to append&gt;:\]\[limitstart-&lt;page&gt;\]\[itemid-&lt;id&gt;:\]\[&lt;search|google|yahoo|wikipedia|em|rep&gt;:\]&lt;link/phrase&gt;\[ '&lt;text to display&gt;\[ ''&lt;tooltip to display&gt;\]\]}
+    {ln[:][debug:][nw:][op:][css-<class>:][search-<selector>:][append-<to append>:][limitstart-<page>][itemid-<id>:][<search|google|yahoo|wikipedia|em|rep>:]<link/phrase>[ '<text to display>[ ''<tooltip to display>]]}
 
 <dl>
   <dt>nw:</dt><dd>"new window" - open links in a new window</dd>
