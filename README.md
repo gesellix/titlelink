@@ -1,19 +1,16 @@
 # TitleLink content plugin
 
-Written by [Tobias Gesellchen](http://www.gesellix.de/) with help on the documentation by [Marc Perkel](http://www.perkel.com/).
+Written by [Tobias Gesellchen](https://www.gesellix.net/) with help on the documentation by [Marc Perkel](http://www.perkel.com/).
 
 [![Build Status](https://travis-ci.org/gesellix-joomla/titlelink.png)](https://travis-ci.org/gesellix-joomla/titlelink)
 
-### Web links
+## Links
 
-[Joomla Extensions Directory](http://extensions.joomla.org/component/option,com\_mtree/task,viewlink/link\_id,427/Itemid,35/),
-
-[Project site](https://github.com/gesellix/titlelink),
-[Download](https://github.com/gesellix/titlelink/downloads),
-[Wiki](https://github.com/gesellix/titlelink/wiki),
-[Tracker](https://github.com/gesellix/titlelink/issues)
-
-[Private homepage](http://www.gesellix.de/)
+- [Joomla Extensions Directory](https://extensions.joomla.org/extension/structure-a-navigation/content-links/titlelink/)
+- [Project site](https://github.com/gesellix/titlelink)
+- [Download](https://github.com/gesellix/titlelink/tree/develop/packages)
+- [Issue Tracker](https://github.com/gesellix/titlelink/issues)
+- [Private homepage](https://www.gesellix.net/)
 
 ### Description
 
