@@ -18,7 +18,7 @@ TitleLink is a Joomla System Plugin to easily create links in Joomla content to 
 By inserting text into your content like {ln:Growing African Violets} you link directly to your content with that title.
 The purpose of this extension is to help create easy ways to drop links to content within the material that you are writing.
 
-TitleLink is a must have to link between Joomla! articles without using cryptic hyperlinks. TitleLink also minimizes the risk of breaking article links when changes are made to the target article. In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.
+TitleLink is a must-have to link between Joomla! articles without using cryptic hyperlinks. TitleLink also minimizes the risk of breaking article links when changes are made to the target article. In contrast to other extensions TitleLink doesn't need the article ids to find your article - so you always get exactly the right links.
 
 ### Installation
 
@@ -81,7 +81,7 @@ The vertical bar '|' tells you to choose one of the options linked together. See
   <dt>op:</dt><dd>"keep tag open" - supress the closing "&lt;/a&gt;". Useful, when you like to add some inner HTML content.</dd>
   <dt>css-&lt;class&gt;:</dt><dd>set a css-class "&lt;class&gt;"</dd>
   <dt>search-&lt;selector&gt;:</dt><dd>create a link to an external site/search engine. See below for supported &lt;selector&gt;s</dd>
-  <dt>append-&lt;to append&gt;:</dt><dd> append to the link, useful for anchors like in http://www.example.com/index.php#anchor</dd>
+  <dt>append-&lt;to append&gt;:</dt><dd> append to the link, useful for anchors like in https://www.example.com/index.php#anchor</dd>
   <dt>limitstart-&lt;page&gt;:</dt><dd>selects the page of an article with several pages. &lt;page&gt; starts with 1, which would be the first page of the article (index 0)</dd>
   <dt>itemid-&lt;id&gt;:</dt><dd>appends &lt;id&gt;, when TitleLink wasn't able to get an itemid by Joomla!</dd>
   <dt>search:</dt><dd>create a link to a site-internal search</dd>
