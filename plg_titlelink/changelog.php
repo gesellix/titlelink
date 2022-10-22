@@ -4,6 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2022-10-22:
+
+- Improve PHP 8.x compatibility (https://github.com/gesellix/titlelink/pull/20)
+
 2019-02-10:
 
 - Improve PHP 7.2 compatibility (https://github.com/gesellix-joomla/titlelink/pull/3)
