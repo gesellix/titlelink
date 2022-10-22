@@ -4,9 +4,9 @@
   <author>Tobias Gesellchen</author>
   <creationDate>2008-06-03</creationDate>
   <copyright>(C) 2005-2022 Tobias Gesellchen. All rights reserved.</copyright>
-  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+  <license>https://opensource.org/licenses/mit-license.php MIT</license>
   <authorEmail>tobias@gesellix.de</authorEmail>
-  <authorUrl>www.gesellix.de</authorUrl>
+  <authorUrl>www.gesellix.net</authorUrl>
   <version>3.7.0 2018-12-01</version>
   <description>DESCTITLELINK</description>
   <files>
