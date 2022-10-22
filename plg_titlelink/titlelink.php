@@ -292,7 +292,7 @@ class plgSystemTitleLink extends JPlugin
                         if (!array_key_exists($phrase, $titlelink_cache)) {
                             // try to find an exact match
                             $result = $this->getByPlugins($database, $this->plugin_cache, $phrase, false);
-                            if ((count($result) != 2) && ($partial_match)) {
+                            if ($partial_match && (is_null($result) || (count($result) != 2))) {
                                 // no exact match found --> try partial match
                                 $result = $this->getByPlugins($database, $this->plugin_cache, $phrase, true);
                             }
@@ -302,7 +302,7 @@ class plgSystemTitleLink extends JPlugin
                         }
 
                         // found something? --> save it
-                        if (count($result) == 2) {
+                        if (!is_null($result) && count($result) == 2) {
                             // save result in cache
                             $titlelink_cache[$phrase] = $result;
                             $link = $result[0];
@@ -450,7 +450,7 @@ class plgSystemTitleLink extends JPlugin
                             $link .= "</ul>";
 
                             $link .= "<br />plugin-results:<ul>";
-                            $count = count($result);
+                            $count = is_null($result) ? 0 : count($result);
                             for ($i = 0; $i < $count; $i++) {
                                 $link .= "<li>" . $result[$i] . "</li>";
                             }
@@ -522,7 +522,7 @@ class plgSystemTitleLink extends JPlugin
             $result = call_user_func($plugins[$i], $database, $phrase_escaped, $partial_match);
 
             // magix number '2' is the amount of strings we need as result
-            if ($result != null && count($result) == 2) {
+            if (!is_null($result) && count($result) == 2) {
                 return $result;
             }
         }
