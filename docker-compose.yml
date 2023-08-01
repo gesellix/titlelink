@@ -1,20 +1,77 @@
+---
 version: "3"
+
 services:
   joomla3:
-    image: joomla:3.10-php7.4
-    container_name: joomla3
+    image: joomla:3
+    restart: unless-stopped
     environment:
       JOOMLA_DB_HOST: joomla3db
       JOOMLA_DB_PASSWORD: password
+    volumes:
+      - joomla3:/var/www/html
+    ports:
+      - "8083:80"
     networks:
       - joomla
+
+  joomla4:
+    image: joomla:4
+    restart: unless-stopped
+    environment:
+      JOOMLA_DB_HOST: joomla4db
+      JOOMLA_DB_PASSWORD: password
+    volumes:
+      - joomla4:/var/www/html
     ports:
-      - "8080:80"
+      - "8084:80"
+    networks:
+      - joomla
+
   joomla3db:
     image: mysql:5.6
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - joomla3db:/var/lib/mysql
     networks:
       - joomla
+
+  joomla4db:
+    image: mysql:5.6
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - joomla4db:/var/lib/mysql
+    networks:
+      - joomla
+
+  joomla3dbadmin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - "8383:80"
+    environment:
+      - PMA_HOST=joomla3db
+    networks:
+      - joomla
+
+  joomla4dbadmin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - "8484:80"
+    environment:
+      - PMA_HOST=joomla4db
+    networks:
+      - joomla
+
 networks:
   joomla:
+
+volumes:
+  joomla3:
+  joomla4:
+  joomla3db:
+  joomla4db:
+...
