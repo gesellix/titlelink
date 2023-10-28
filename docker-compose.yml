@@ -14,6 +14,23 @@ services:
       - "8083:80"
     networks:
       - joomla
+  joomla3db:
+    image: mysql:5.6
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - joomla3db:/var/lib/mysql
+    networks:
+      - joomla
+  joomla3dbadmin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - "8383:80"
+    environment:
+      - PMA_HOST=joomla3db
+    networks:
+      - joomla
 
   joomla4:
     image: joomla:4
@@ -27,17 +44,6 @@ services:
       - "8084:80"
     networks:
       - joomla
-
-  joomla3db:
-    image: mysql:5.6
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    volumes:
-      - joomla3db:/var/lib/mysql
-    networks:
-      - joomla
-
   joomla4db:
     image: mysql:5.6
     restart: unless-stopped
@@ -47,16 +53,6 @@ services:
       - joomla4db:/var/lib/mysql
     networks:
       - joomla
-
-  joomla3dbadmin:
-    image: phpmyadmin/phpmyadmin:5
-    ports:
-      - "8383:80"
-    environment:
-      - PMA_HOST=joomla3db
-    networks:
-      - joomla
-
   joomla4dbadmin:
     image: phpmyadmin/phpmyadmin:5
     ports:
@@ -66,12 +62,44 @@ services:
     networks:
       - joomla
 
+  joomla5:
+    image: joomla:5
+    restart: unless-stopped
+    environment:
+      JOOMLA_DB_HOST: joomla5db
+      JOOMLA_DB_PASSWORD: password
+    volumes:
+      - joomla5:/var/www/html
+    ports:
+      - "8085:80"
+    networks:
+      - joomla
+  joomla5db:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - joomla5db:/var/lib/mysql
+    networks:
+      - joomla
+  joomla5dbadmin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - "8585:8080"
+    environment:
+      - PMA_HOST=joomla5db
+    networks:
+      - joomla
+
 networks:
   joomla:
 
 volumes:
   joomla3:
-  joomla4:
   joomla3db:
+  joomla4:
   joomla4db:
+  joomla5:
+  joomla5db:
 ...
