@@ -4,6 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2023-10-29:
+
+- Add Joomla! Update System support (https://github.com/gesellix/titlelink/pull/24)
+
 2023-08-01:
 
 - Improve Joomla 4.x compatibility (https://github.com/gesellix/titlelink/pull/23)
