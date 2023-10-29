@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+	<update>
+		<name>TitleLink</name>
+		<description>TitleLink Content Plugin</description>
+		<element>titlelink</element>
+		<type>plugin</type>
+		<version>3.8.0</version>
+		<client>administrator</client>
+		<infourl title="TitleLink Content Plugin">https://github.com/gesellix/titlelink/releases/tag/v3.8.0</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/gesellix/titlelink/releases/download/v3.8.0/plg_titlelink_2023-08-01_joomla3_10.zip</downloadurl>
+		</downloads>
+		<targetplatform name="joomla" version="((3\.(9|10))|(4\.[01234])|(5\.0))" />
+	</update>
+	<update>
+		<name>TitleLink</name>
+		<description>TitleLink Content Plugin</description>
+		<element>titlelink</element>
+		<type>plugin</type>
+		<version>3.8.1</version>
+		<client>administrator</client>
+		<infourl title="TitleLink Content Plugin">https://github.com/gesellix/titlelink/releases/tag/v3.8.1</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/gesellix/titlelink/releases/download/v3.8.1/plg_titlelink_2023-10-29_v3.8.1.zip</downloadurl>
+		</downloads>
+		<targetplatform name="joomla" version="((3\.(9|10))|(4\.[01234])|(5\.0))" />
+	</update>
+</updates>
