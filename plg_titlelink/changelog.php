@@ -4,6 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2025-11-14:
+
+- Update package to use the correct update url (https://github.com/gesellix/titlelink/pull/26)
+
 2023-10-29:
 
 - Add Joomla! Update System support (https://github.com/gesellix/titlelink/pull/24)
