@@ -15,7 +15,7 @@ function plugin_weblinks($database, $phrase, $partial_match = true)
 
   $result = null;
 
-  if (file_exists("components/com_weblinks/weblinks.php"))
+  if (is_dir("components/com_weblinks"))
   {
     $where_clause = ($partial_match) ? "LIKE '%$phrase%'" : "= '$phrase'";
 
