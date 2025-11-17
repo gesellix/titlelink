@@ -4,6 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2025-11-17:
+
+- Fix com_weblinks compatibility (https://github.com/gesellix/titlelink/pull/28)
+
 2025-11-14:
 
 - Update package to use the correct update url (https://github.com/gesellix/titlelink/pull/26)
