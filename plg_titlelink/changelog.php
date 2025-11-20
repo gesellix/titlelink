@@ -4,6 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
+2025-11-20:
+
+- Add com_phocadownload plugin
+
 2025-11-17:
 
 - Fix com_weblinks compatibility (https://github.com/gesellix/titlelink/pull/28)
