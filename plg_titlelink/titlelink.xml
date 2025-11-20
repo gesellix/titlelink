@@ -7,7 +7,7 @@
   <license>LGPL-3.0-or-later</license>
   <authorEmail>tobias@gesellix.de</authorEmail>
   <authorUrl>www.gesellix.net</authorUrl>
-  <version>3.8.3 2025-11-17</version>
+  <version>3.9.0 2025-11-20</version>
   <updateservers>
     <!-- Note: No spaces or linebreaks allowed between the server tags -->
     <server type="extension" priority="1" name="TitleLink Updates">https://raw.githubusercontent.com/gesellix/titlelink/develop/manifest.xml</server>
@@ -27,6 +27,7 @@
     <filename>titlelink_plugins/plugin_peoplebook.php</filename>
     <filename>titlelink_plugins/plugin_jmovies.php</filename>
     <filename>titlelink_plugins/plugin_weblinks.php</filename>
+    <filename>titlelink_plugins/plugin_phocadownload.php</filename>
   </files>
   <languages folder="administrator/language">
     <language tag="en-GB">en-GB/en-GB.plg_system_titlelink.ini</language>
@@ -247,6 +248,24 @@
             type="list"
             default="0"
             label="Content by Remository (needs com_remository)"
+            description="TODO.">
+          <option value="0">Disabled</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </field>
+        <field
+            name="plugin_phocadownload"
+            type="list"
+            default="0"
+            label="Content by Phoca Download (needs com_phocadownload)"
             description="TODO.">
           <option value="0">Disabled</option>
           <option value="1">1</option>
