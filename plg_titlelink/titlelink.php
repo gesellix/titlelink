@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (C) 2005 - 2023 Tobias Gesellchen. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2025 Tobias Gesellchen. All rights reserved.
  * @license   GNU/GPL, see LICENSE.php
  * Joomla! is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -9,12 +9,14 @@
  * See COPYRIGHT.php for copyright notices and details.
  */
 
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Direct Access to this location is not allowed.');
 
-jimport('joomla.plugin.plugin');
-
-class plgSystemTitleLink extends JPlugin
+class PlgSystemTitleLink extends CMSPlugin
 {
 
     /**
@@ -23,7 +25,7 @@ class plgSystemTitleLink extends JPlugin
      * value: plugin result
      */
     //var $titlelink_cache = array();
-    var $plugin_cache;
+    protected $plugin_cache;
 
     var $title1_delim = " '";
     var $title2_delim = " ''";
@@ -74,7 +76,7 @@ class plgSystemTitleLink extends JPlugin
      * @param object $subject The object to observe
      * @param array $config The object that holds the plugin parameters
      */
-    function __construct(& $subject, $config = array ())
+    public function __construct($subject, $config = array())
     {
         parent::__construct($subject, $config);
 
@@ -104,7 +106,7 @@ class plgSystemTitleLink extends JPlugin
 
     public function onAfterRender()
     {
-        $app = JFactory::getApplication();
+        $app = Factory::getApplication();
         if ($app->isClient('administrator')) {
             return true;
         }
@@ -126,7 +128,7 @@ class plgSystemTitleLink extends JPlugin
     {
         global $titlelink_cache;
 
-        $database = JFactory::getDBO();
+        $database = Factory::getDbo();
         $matches = array ();
 
         if (preg_match_all($this->finalpattern, $content, $matches, PREG_PATTERN_ORDER)) {
@@ -287,7 +289,7 @@ class plgSystemTitleLink extends JPlugin
                     if (empty($link)) { // did the search functions already set a link?
                         // ask cache
                         if (!is_array($titlelink_cache)) {
-                            $titlelink_cache = array ();
+                            $titlelink_cache = array();
                         }
                         if (!array_key_exists($phrase, $titlelink_cache)) {
                             // try to find an exact match
@@ -401,7 +403,7 @@ class plgSystemTitleLink extends JPlugin
                         else {
                             // internal link, make it sef
                             //$link = htmlentities($link);
-                            $link = JRoute::_($link);
+                            $link = Route::_($link);
                         }
 
                         // add the anchor to the found link
@@ -480,10 +482,10 @@ class plgSystemTitleLink extends JPlugin
 /////////////////////////////////////////////
 // internal functions
 
-    function callExternalPlugin($article, $params, $page = 0)
+    public function callExternalPlugin($article, $params, $page = 0)
     {
-//        $plugin_to_call = JFactory::getApplication()->input->get($this->plugin_call);
-        $plugin_to_call = JRequest::getVar($this->plugin_call);
+        $app = Factory::getApplication();
+        $plugin_to_call = $app->input->get($this->plugin_call);
         //$plugin_to_call = html_entity_decode(mosGetParam($_GET, $this->plugin_call), ENT_QUOTES);
         $plugin_to_call = stripslashes($plugin_to_call);
         if (!empty($plugin_to_call)) {
