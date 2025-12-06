@@ -4,9 +4,10 @@ defined( '_JEXEC' ) or die('Direct Access to this location is not allowed.');
 
 ?>
 
-2025-11-20:
+2025-11-28:
 
 - Add com_phocadownload plugin
+- Updated target platform to include Joomla 4.x, 5.x
 
 2025-11-17:
 
