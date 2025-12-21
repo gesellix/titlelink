@@ -7,7 +7,7 @@
   <license>LGPL-3.0-or-later</license>
   <authorEmail>tobias@gesellix.de</authorEmail>
   <authorUrl>www.gesellix.net</authorUrl>
-  <version>3.9.0 2025-11-28</version>
+  <version>3.9.0 2025-12-20</version>
   <updateservers>
     <!-- Note: No spaces or linebreaks allowed between the server tags -->
     <server type="extension" priority="1" name="TitleLink Updates">https://raw.githubusercontent.com/gesellix/titlelink/develop/manifest.xml</server>

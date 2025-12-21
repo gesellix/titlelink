@@ -61,7 +61,7 @@
 		<client>administrator</client>
 		<infourl title="TitleLink Content Plugin">https://github.com/gesellix/titlelink/releases/tag/v3.9.0</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/gesellix/titlelink/releases/download/v3.9.0/plg_titlelink_2025-11-28_v3.9.0.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/gesellix/titlelink/releases/download/v3.9.0/plg_titlelink_2025-12-20_v3.9.0.zip</downloadurl>
 		</downloads>
 		<targetplatform name="joomla" version="(3\.(9|10))|(4.)|(5.)" />
 	</update>
