@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+
+## [v4.0.0] - 2025-12-22
 ### Changed
 - Update JPlugin to new CMSPlugin supported since J4 (https://github.com/gesellix/titlelink/pull/35)
 - Drop Joomla 3.x support (https://github.com/gesellix/titlelink/pull/35)
