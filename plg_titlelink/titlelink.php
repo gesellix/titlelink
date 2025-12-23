@@ -80,7 +80,6 @@ class PlgSystemTitleLink extends CMSPlugin
     {
         parent::__construct($subject, $config);
 
-//        $config = JFactory::getConfig();
         $this->trigger_prefix = $this->params->get('trigger_prefix', "{ln");
         $this->trigger_suffix = $this->params->get('trigger_suffix', "}");
         $this->separator = $this->params->get('separator', ":");
