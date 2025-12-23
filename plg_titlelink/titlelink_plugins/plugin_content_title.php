@@ -14,8 +14,6 @@ function plugin_contentTitle($database, $phrase, $partial_match = true)
     require_once( JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php' );
   }
 
-  //$database = & JFactory::getDBO();
-
   //$base_link = "index.php?option=com_content&view=article&id=";
 
   $result = null;
