@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Fixed various minor issues during Joomla 6 update check
 
 ## [v4.0.0] - 2025-12-22
 ### Changed
