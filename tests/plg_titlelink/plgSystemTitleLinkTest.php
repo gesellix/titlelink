@@ -1,6 +1,7 @@
 <?php
 
 require_once TITLELINK_BASE_DIR . '/plg_titlelink/titlelink.php';
+use Joomla\CMS\Factory;
 
 class plgSystemTitleLinkTest extends TestCase
 {
@@ -19,11 +20,11 @@ class plgSystemTitleLinkTest extends TestCase
     {
         $this->saveFactoryState();
 
-        JFactory::$application = $this->getMockCmsApp();
-        JFactory::$database = $this->getMockDatabase();
+        Factory::$application = $this->getMockCmsApp();
+        Factory::$database = $this->getMockDatabase();
 
         $dispatcher = JEventDispatcher::getInstance();
-        JFactory::$application->loadDispatcher($dispatcher);
+        Factory::$application->loadDispatcher($dispatcher);
 
         $this->_params = new JRegistry;
         $config = array ();
@@ -199,28 +200,28 @@ class plgSystemTitleLinkTest extends TestCase
     public function test_onAfterRender_in_admin_backend_returns_unchanged_body()
     {
         $content = "{ln:body}";
-        JFactory::$application->setBody($content);
-        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => true));
+        Factory::$application->setBody($content);
+        $this->assignMockReturns(Factory::$application, array ('isAdmin' => true));
 
         $this->_titlelink->onAfterRender();
 
         $this->assertThat(
-            JFactory::$application->getBody(),
+            Factory::$application->getBody(),
             $this->equalTo($content));
     }
 
     public function test_onAfterRender_in_content_edit_mode_returns_unchanged_body()
     {
         $content = "{ln:body}";
-        JFactory::$application->setBody($content);
-        $this->assignMockReturns(JFactory::$application, array ('isAdmin' => false));
-        JFactory::$application->input->set('option', 'com_content');
-        JFactory::$application->input->set('layout', 'edit');
+        Factory::$application->setBody($content);
+        $this->assignMockReturns(Factory::$application, array ('isAdmin' => false));
+        Factory::$application->input->set('option', 'com_content');
+        Factory::$application->input->set('layout', 'edit');
 
         $this->_titlelink->onAfterRender();
 
         $this->assertThat(
-            JFactory::$application->getBody(),
+            Factory::$application->getBody(),
             $this->equalTo($content));
     }
 
@@ -237,10 +238,10 @@ class plgSystemTitleLinkTest extends TestCase
     {
         // TODO extract replaceTitleLinksWithURLs to own component and make it replaceable by a mock/spy
         $content = "content";
-        JFactory::$application->setBody($content);
+        Factory::$application->setBody($content);
         $this->_titlelink->onAfterRender();
         $this->assertThat(
-            JFactory::$application->getBody(),
+            Factory::$application->getBody(),
             $this->equalTo($content));
     }
 
@@ -248,10 +249,10 @@ class plgSystemTitleLinkTest extends TestCase
     {
         // TODO extract replaceTitleLinksWithURLs to own component and make it replaceable by a mock/spy
         $content = "content";
-        JFactory::$application->setBody($content);
+        Factory::$application->setBody($content);
         $this->_titlelink->onAfterRender();
         $this->assertThat(
-            JFactory::$application->getBody(),
+            Factory::$application->getBody(),
             $this->equalTo($content));
     }
 
@@ -367,9 +368,9 @@ class plgSystemTitleLinkTest extends TestCase
     //
     //        $cmsRouter = $jApplicationCms::getRouter();
 
-    //        $this->assignMockReturns(JFactory::$application, array ('getName' => 'site'));
-            $this->assignMockReturns(JFactory::$application, array ('getRouter' => $router));
-            $cmsRouter = JFactory::$application->getRouter();
+        //        $this->assignMockReturns(Factory::$application, array ('getName' => 'site'));
+            $this->assignMockReturns(Factory::$application, array ('getRouter' => $router));
+            $cmsRouter = Factory::$application->getRouter();
 
             $this->assertEquals(
                 $cmsRouter,

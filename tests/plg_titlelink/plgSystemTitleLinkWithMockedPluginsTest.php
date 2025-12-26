@@ -1,6 +1,7 @@
 <?php
 
 require_once TITLELINK_BASE_DIR . '/plg_titlelink/titlelink.php';
+use Joomla\CMS\Factory;
 
 class plgSystemTitleLinkWithMockedPluginsTest extends TestCase
 {
@@ -19,11 +20,11 @@ class plgSystemTitleLinkWithMockedPluginsTest extends TestCase
     {
         $this->saveFactoryState();
 
-        JFactory::$application = $this->getMockCmsApp();
-        JFactory::$database = $this->getMockDatabase();
+        Factory::$application = $this->getMockCmsApp();
+        Factory::$database = $this->getMockDatabase();
 
         $dispatcher = JEventDispatcher::getInstance();
-        JFactory::$application->loadDispatcher($dispatcher);
+        Factory::$application->loadDispatcher($dispatcher);
 
         $this->_params = new JRegistry;
         $config = array ();
